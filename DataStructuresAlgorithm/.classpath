@@ -2,10 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Tomcat"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ArrayUtil"/>
-	<classpathentry kind="lib" path="C:/data/DRM/3rd Sem/API/MySQL Connector/mysql-connector-java-5.0.8-bin.jar"/>
-	<classpathentry kind="lib" path="C:/data/DRM/3rd Sem/API/jdom-2.0.2/jdom-2.0.2.jar"/>
-	<classpathentry kind="lib" path="C:/data/DRM/3rd Sem/API/json-simple-1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Misc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ArrayUtils"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Tomcat8"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
