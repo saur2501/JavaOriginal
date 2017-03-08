@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 // To import an external class you use import
 // You can import whole libraries of classes like this import java.util.*;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 import java.lang.Math.*;
  
 public class Lesson35{

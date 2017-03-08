@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 
 /* Java doesn't allow you to inherit from more than one 
  * class. So, what do you do when you want do you do

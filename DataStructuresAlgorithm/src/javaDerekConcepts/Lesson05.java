@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 import java.util.Scanner; // Scanner is a class that contains a bunch of methods
  
 public class Lesson05 {

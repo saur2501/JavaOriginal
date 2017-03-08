@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
         /* An exception object is created when an error occurs
 
          * It tells you what error occurred

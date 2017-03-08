@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 // Here I introduce the String class
 // A String is an object unlike the other primitive data types
  

@@ -2,7 +2,7 @@
 // of groups of objects. An ArrayList differs from an array in
 // that it automatically resizes itself automatically. ArrayLists
 // are easy to add to and delete from.
-package javaConcepts;
+package javaDerekConcepts;
  
 import java.util.ArrayList; // The ArrayList library
 import java.util.Iterator; // The Iterator Library

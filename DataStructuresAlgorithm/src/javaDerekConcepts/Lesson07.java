@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 // Basic class definition
 // public means this class can be used by other classes
 // Class names should begin with a capital letter

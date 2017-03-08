@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 // The LinkedList class is a collection based on a Linked List
 
 // instead of an array. They are particularly good when you

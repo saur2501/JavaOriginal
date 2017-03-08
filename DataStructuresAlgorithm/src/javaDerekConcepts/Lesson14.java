@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 // Animal will act as a Super class for other Animals
 class Animal {
 	

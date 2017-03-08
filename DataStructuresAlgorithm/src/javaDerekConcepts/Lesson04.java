@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 import java.util.Scanner; // Library that allows us to capture user input
  
 public class Lesson04 {

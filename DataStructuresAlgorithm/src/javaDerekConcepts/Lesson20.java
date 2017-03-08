@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 //Swing allows you to create Graphical User Interfaces
 // You need the Swing library to create GUI interfaces
 import java.awt.Dimension;

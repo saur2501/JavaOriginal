@@ -1,4 +1,4 @@
-package javaConcepts;
+package javaDerekConcepts;
 /*By using threads you can execute multiple blocks
 of code at the same time. This program will output
 the current time and then at a specific time execute
