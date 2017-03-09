@@ -1,4 +1,4 @@
-package javaDerekConcepts;
+package javaConcepts;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,7 +42,7 @@ class MyThread implements Runnable {
 
 }
 
-public class ExecutorServiceTest {
+public class Multithreading {
 
 	private static Future taskTwo = null;
 	private static Future taskThree = null;
