@@ -1,183 +1,132 @@
 package javaConcepts;
 
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.UUID;
+import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class GenerateRandomStuff {
-	
-	public static void main(String[] args) throws Exception {
-		System.out.println("Hi There!!");
-		generateValuesForFieldName("Hi", 10);
-	}
-	private static final Random rand = new Random();
-	public static Object generateValuesForFieldName(String fieldname, Integer fieldtype) throws Exception {
-		String dType = "DATETIME";
 
+	public String toString() {
+		return "RecordRandom";
+	}
+
+	public Object generateValuesForFieldName(String fieldName, Integer fieldType) throws Exception {
+
+		String dType = "DATETIME";
+		Random random = new Random();
+		
 		switch (dType) {
 
 		case "DATETIME":
-			System.out.println("Now Epoch = " + getCurrentDateTimeOffsetInLong());
+			Date date = new Date();
+			Long offset = nextLong(999999L);
+			Long lDate = date.getTime() - offset;
+
+			return lDate.toString();
 
 		case "UUID":
-			System.out.println("Random UUID = " + getUUID());
+			return UUID.randomUUID();
 
 		case "BOOLEAN":
-			System.out.println("Random Boolean = " + generateRandomBooleanValue());
+			return random.nextBoolean();
 
 		case "TINYINT":
-			System.out.println("Random TinyInt = " + generateRandomTinyIntValue());
+			return (byte) random.nextInt(Byte.MAX_VALUE);
 
 		case "SMALLINT":
-			System.out.println("Random SmallInt = " + generateRandomSmallIntValue());
+			short rndSmallInt = (short) random.nextInt(Short.MAX_VALUE);
+			return rndSmallInt;
 
 		case "INT":
-			System.out.println("Random Int = " + generateRandomIntValue());
+			int rndInt = random.nextInt(Integer.MAX_VALUE);
+			int minVal = 0;
+			return rndInt - minVal;
+			
+		case "FLOATNORMAL":
+			float mean = 25; float sd = 2;
+			float resultFloat = (float) (mean + (new Random().nextGaussian()) * sd);
+			BigDecimal bdf = new BigDecimal(resultFloat);
+			bdf = bdf.setScale(1, BigDecimal.ROUND_HALF_EVEN);
+			return bdf.floatValue();
 
 		case "BIGINT":
-			System.out.println("Random BigInt = " + generateRandomBigIntValue(Long.MAX_VALUE));
-			
+			Long rndLong = nextLong(999999L);
+			return rndLong;
+
 		case "NULLINT":
-			System.out.println("Random NullInt = " + generateNullIntValue());
-			
+			return 0;
+
 		case "FLOAT":
-			System.out.println("Random FloatValue = " + generateRandomFloatValue());
-			
+			return (byte) random.nextInt(Byte.MAX_VALUE + 1) + random.nextFloat();
+
 		case "DOUBLE":
-			System.out.println("Random Double = " + generateRandomDoubleValue());
-			
+			return (byte) random.nextInt(Byte.MAX_VALUE + 1) + random.nextDouble();
+
 		case "STRING":
-			System.out.println("Random Varchar = " + generateVarcharData());
-			
+			return RandomStringUtils.randomAlphanumeric(10);
+		
+		case "RANDOMSELECTSTRING":
+			String[] valuesArray = {"Hi","There","Godji","Restful"};
+			List<String> values = Arrays.asList(valuesArray);
+			String stringAtRandomIndex = values.get(new Random().nextInt(values.size()));
+			return stringAtRandomIndex;
+
 		case "DATE":
-			System.out.println("Random Date = " + generateCurrentDateInLong());
-			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			/*try {
+				dateWithoutTime = sdf.parse(sdf.format(new Date()));
+			} catch (ParseException e) {
+				throw e;
+			}
+			Long date = dateWithoutTime.getTime();
+				
+			return dateWithoutTime.toString();
+			return sdf.format(new Date());*/	
+			date = new Date();
+			offset = nextLong(99999999999L);
+			lDate = date.getTime() - offset;
+			return sdf.format(new Date(lDate));
+
 		case "BYTES":
-			System.out.println("Random Bytes = " + generateRandomBytes());
+			byte[] b = new byte[60];
+			random.nextBytes(b);
+			return b;
 			
 		case "INETADDRESS":
-			System.out.println("Random InetAddress = " + generateInetAddress());
+			return random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256);
+		case "":
+			
 
 		default:
 			try {
-				throw new Exception("Unknown field type for fieldname\"" + fieldname + "\"");
+				throw new Exception("Unknown field type for fieldname\"" + fieldName + "\"");
 			} catch (Exception e) {
 				System.exit(0);
 			}
-			break;
 		}
 		return null;
 	}
 
-	private static String generateInetAddress() {
-		Random r = new Random();
-		return r.nextInt(256) + "." + r.nextInt(256) + "." + r.nextInt(256) + "." + r.nextInt(256);
-	}
-
 	public long generateReversedTimeStamp() {
 		Date date = new Date();
-		Long offset = generateRandomBigIntValue(999999L);
+		Long offset = nextLong(999999L);
 		long lDate = date.getTime() + offset;
 		return (Long.MAX_VALUE - lDate);
-	}
-
-	public static Long generateRandomBigIntValue(long range) {
-		Long rndLong = nextLong(range);
-		return rndLong;
 	}
 	
 	public static long nextLong(long range) {
 		 // error checking and 2^x checking removed for simplicity.
 		   long bits, val;
 		   do {
-		      bits = (rand.nextLong() << 1) >>> 1;
+		      bits = ((new Random()).nextLong() << 1) >>> 1;
 		      val = bits % range;
 		   } while (bits-val+(range-1) < 0L);
 		   return val;
 	}
-	
-	public static String getCurrentDateTimeOffsetInLong() {
-		System.out.println("Drill!");
-		Date date = new Date();
-		Long offset = generateRandomBigIntValue(999999L);
-		Long lDate = date.getTime() + offset;
-
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-		formatter.setTimeZone(TimeZone.getDefault());
-
-		return lDate.toString();
-	}
-
-	public static UUID getUUID() {
-		System.out.println("Chill!");
-		return UUID.randomUUID();
-	}
-
-	public static boolean generateRandomBooleanValue() {
-		boolean rndBool = rand.nextBoolean();
-		return rndBool;
-	}
-
-	public static short generateRandomTinyIntValue() {
-		short rndSmallInt = (short) rand.nextInt(127);
-		return rndSmallInt;
-	}
-
-	public static short generateRandomSmallIntValue() {
-		short rndSmallInt = (short) rand.nextInt(Short.MAX_VALUE + 1);
-		return rndSmallInt;
-	}
-
-	public static int generateRandomIntValue() {
-		int rndInt = rand.nextInt(Integer.MAX_VALUE);
-		int minVal = 0;
-		return rndInt - minVal;
-	}
-
-	public static short generateNullIntValue() {
-		return 0;
-	}
-
-	private static Float generateRandomFloatValue() {
-		float rndFloat = rand.nextFloat();
-		byte b1 = (byte) rand.nextInt(Byte.MAX_VALUE + 1);
-		byte b2 = 0;
-		return rndFloat + b1 - b2;
-	}
-
-	public static Double generateRandomDoubleValue() {
-		double rndDouble = rand.nextDouble();
-		byte b1 = (byte) rand.nextInt(Byte.MAX_VALUE + 1);
-		byte b2 = 0;
-		return rndDouble + b1 - b2;
-	}
-
-	public static String generateVarcharData() {
-		return RandomStringUtils.randomAlphanumeric(10);
-	}
-
-	public static String generateCurrentDateInLong() throws Exception {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateWithoutTime = null;
-		try {
-			dateWithoutTime = sdf.parse(sdf.format(new Date()));
-		} catch (ParseException e) {
-			throw e;
-		}
-		Long date = dateWithoutTime.getTime();
-		return date.toString();
-	}
-
-	private static byte[] generateRandomBytes() {
-		byte[] b = new byte[60];
-		new Random().nextBytes(b);
-		return b;
-	}
-
 }
