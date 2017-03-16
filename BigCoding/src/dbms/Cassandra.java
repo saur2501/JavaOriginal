@@ -41,7 +41,7 @@ CREATE TABLE testCassandraStore(
       MeasType text,
       PRIMARY KEY ((MeasUID,MeasType), MeasTimeStamp)
 ) WITH COMPACT STORAGE;
-
+select * from testCassandraStore limit 10;
  *  */
 
 public class Cassandra {
