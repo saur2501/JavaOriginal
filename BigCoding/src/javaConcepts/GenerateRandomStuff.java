@@ -11,7 +11,9 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class GenerateRandomStuff {
-
+	
+	private Random random = new Random();
+	
 	public String toString() {
 		return "RecordRandom";
 	}
@@ -19,7 +21,6 @@ public class GenerateRandomStuff {
 	public Object generateValuesForFieldName(String fieldName, Integer fieldType) throws Exception {
 
 		String dType = "DATETIME";
-		Random random = new Random();
 		
 		switch (dType) {
 
@@ -67,7 +68,18 @@ public class GenerateRandomStuff {
 
 		case "DOUBLE":
 			return (byte) random.nextInt(Byte.MAX_VALUE + 1) + random.nextDouble();
-
+		case "DOUBLEZIPFIAN":
+			double value = 35.5;
+			double range = 2;
+			double stepSize = 0.1;
+			int size = (int) (range / stepSize);
+			double skew = 1;
+			double bottom = 0;
+			for(int i=1;i < size; i++) {
+				bottom += (1/Math.pow(i, skew));
+			}
+			int nextZipfianInt = nextZipf(size, skew, bottom);
+			return (long) (value + nextZipfianInt * stepSize);
 		case "STRING":
 			return RandomStringUtils.randomAlphanumeric(10);
 		
@@ -129,4 +141,22 @@ public class GenerateRandomStuff {
 		   } while (bits-val+(range-1) < 0L);
 		   return val;
 	}
+	public int nextZipf(int size, double skew, double bottom) {
+		
+	   int rank;
+	   double friquency = 0;
+	   double dice;
+	 
+	   rank = random.nextInt(size);
+	   friquency = (1.0d / Math.pow(rank, skew)) / bottom;
+	   dice = random.nextDouble();
+	 
+	   while(!(dice < friquency)) {
+	     rank = random.nextInt(size);
+	     friquency = (1.0d / Math.pow(rank, skew)) / bottom;
+	     dice = random.nextDouble();
+	   }
+	 
+	   return rank;
+	 }
 }
