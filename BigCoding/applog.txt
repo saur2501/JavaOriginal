@@ -206,3 +206,131 @@ DEBUG   2017-03-13 19:15:38,619 [cluster2-nio-worker-3] io.netty.buffer.PoolThre
 DEBUG   2017-03-13 19:15:38,622 [cluster2-nio-worker-1] io.netty.buffer.PoolThreadCache  - Freed 28 thread-local buffer(s) from thread: cluster2-nio-worker-1
 DEBUG   2017-03-13 19:15:40,980 [cluster3-nio-worker-2] io.netty.buffer.PoolThreadCache  - Freed 7 thread-local buffer(s) from thread: cluster3-nio-worker-2
 DEBUG   2017-03-13 19:15:40,982 [cluster3-nio-worker-0] io.netty.buffer.PoolThreadCache  - Freed 28 thread-local buffer(s) from thread: cluster3-nio-worker-0
+INFO    2017-03-21 14:05:02,258 [main] org.apache.hive.jdbc.Utils  - Supplied authorities: 192.168.237.132:10000
+INFO    2017-03-21 14:05:02,279 [main] org.apache.hive.jdbc.Utils  - Resolved authority: 192.168.237.132:10000
+INFO    2017-03-21 15:40:21,800 [main] org.apache.hive.jdbc.Utils  - Supplied authorities: 192.168.237.132:10000
+INFO    2017-03-21 15:40:21,802 [main] org.apache.hive.jdbc.Utils  - Resolved authority: 192.168.237.132:10000
+INFO    2017-03-21 15:46:27,649 [main] org.apache.hive.jdbc.Utils  - Supplied authorities: 192.168.237.132:10000
+INFO    2017-03-21 15:46:27,651 [main] org.apache.hive.jdbc.Utils  - Resolved authority: 192.168.237.132:10000
+INFO    2017-03-21 15:46:27,770 [main] org.apache.hive.jdbc.HiveConnection  - Will try to open client transport with JDBC Uri: jdbc:hive2://192.168.237.132:10000
+DEBUG   2017-03-21 15:46:27,771 [main] org.apache.thrift.transport.TSaslTransport  - opening transport org.apache.thrift.transport.TSaslClientTransport@5a01ccaa
+DEBUG   2017-03-21 15:46:27,778 [main] org.apache.thrift.transport.TSaslClientTransport  - Sending mechanism name PLAIN and initial response of length 15
+DEBUG   2017-03-21 15:46:27,779 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status START and payload length 5
+DEBUG   2017-03-21 15:46:27,779 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status COMPLETE and payload length 15
+DEBUG   2017-03-21 15:46:27,780 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Start message handled
+DEBUG   2017-03-21 15:46:27,780 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Main negotiation loop complete
+DEBUG   2017-03-21 15:46:27,780 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: SASL Client receiving last message
+DEBUG   2017-03-21 15:46:27,798 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Received message with status COMPLETE and payload length 0
+DEBUG   2017-03-21 15:46:27,812 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 71
+DEBUG   2017-03-21 15:46:27,936 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 15:46:27,950 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 136
+DEBUG   2017-03-21 15:46:27,952 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 15:46:27,960 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 15:46:27,963 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 15:46:27,969 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 15:46:28,187 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 15:46:28,192 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 123
+DEBUG   2017-03-21 15:46:28,232 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 15:46:28,233 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 15:46:28,332 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 15:46:28,332 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 15:46:28,333 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 15:46:28,333 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 142
+DEBUG   2017-03-21 15:46:28,377 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 2429
+INFO    2017-03-21 15:47:20,011 [main] org.apache.hive.jdbc.Utils  - Supplied authorities: 192.168.237.132:10000
+INFO    2017-03-21 15:47:20,013 [main] org.apache.hive.jdbc.Utils  - Resolved authority: 192.168.237.132:10000
+INFO    2017-03-21 15:47:20,082 [main] org.apache.hive.jdbc.HiveConnection  - Will try to open client transport with JDBC Uri: jdbc:hive2://192.168.237.132:10000
+DEBUG   2017-03-21 15:47:20,083 [main] org.apache.thrift.transport.TSaslTransport  - opening transport org.apache.thrift.transport.TSaslClientTransport@5a01ccaa
+DEBUG   2017-03-21 15:47:20,087 [main] org.apache.thrift.transport.TSaslClientTransport  - Sending mechanism name PLAIN and initial response of length 15
+DEBUG   2017-03-21 15:47:20,089 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status START and payload length 5
+DEBUG   2017-03-21 15:47:20,089 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status COMPLETE and payload length 15
+DEBUG   2017-03-21 15:47:20,089 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Start message handled
+DEBUG   2017-03-21 15:47:20,089 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Main negotiation loop complete
+DEBUG   2017-03-21 15:47:20,089 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: SASL Client receiving last message
+DEBUG   2017-03-21 15:47:20,089 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Received message with status COMPLETE and payload length 0
+DEBUG   2017-03-21 15:47:20,101 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 71
+DEBUG   2017-03-21 15:47:20,116 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 15:47:20,133 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 136
+DEBUG   2017-03-21 15:47:20,135 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 15:47:20,143 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 15:47:20,145 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 15:47:20,150 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 15:47:20,152 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 15:47:20,154 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 123
+DEBUG   2017-03-21 15:47:20,177 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 15:47:20,177 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 15:47:20,294 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 15:47:20,294 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 15:47:20,295 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 15:47:20,295 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 141
+DEBUG   2017-03-21 15:47:20,530 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 15:47:20,530 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 15:47:25,544 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 15:47:25,544 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 15:47:26,103 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 15:47:26,110 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 102
+DEBUG   2017-03-21 15:47:26,112 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 2022
+DEBUG   2017-03-21 15:47:26,131 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 83
+DEBUG   2017-03-21 15:47:26,200 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 40
+INFO    2017-03-21 16:23:44,307 [main] org.apache.hive.jdbc.Utils  - Supplied authorities: 192.168.237.132:10000
+INFO    2017-03-21 16:23:44,352 [main] org.apache.hive.jdbc.Utils  - Resolved authority: 192.168.237.132:10000
+INFO    2017-03-21 16:23:45,160 [main] org.apache.hive.jdbc.HiveConnection  - Will try to open client transport with JDBC Uri: jdbc:hive2://192.168.237.132:10000
+DEBUG   2017-03-21 16:23:45,161 [main] org.apache.thrift.transport.TSaslTransport  - opening transport org.apache.thrift.transport.TSaslClientTransport@5a01ccaa
+DEBUG   2017-03-21 16:23:45,194 [main] org.apache.thrift.transport.TSaslClientTransport  - Sending mechanism name PLAIN and initial response of length 15
+DEBUG   2017-03-21 16:23:45,218 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status START and payload length 5
+DEBUG   2017-03-21 16:23:45,219 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status COMPLETE and payload length 15
+DEBUG   2017-03-21 16:23:45,219 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Start message handled
+DEBUG   2017-03-21 16:23:45,220 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Main negotiation loop complete
+DEBUG   2017-03-21 16:23:45,220 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: SASL Client receiving last message
+DEBUG   2017-03-21 16:23:45,234 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Received message with status COMPLETE and payload length 0
+DEBUG   2017-03-21 16:23:45,327 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 71
+DEBUG   2017-03-21 16:23:45,375 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 16:23:45,466 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 136
+DEBUG   2017-03-21 16:23:45,470 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 16:23:45,496 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 16:23:45,500 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 16:23:45,510 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 16:23:45,530 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 16:23:45,533 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 123
+DEBUG   2017-03-21 16:23:45,548 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 16:23:45,548 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 16:23:45,691 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 16:23:45,691 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 16:23:45,692 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 16:23:45,692 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 142
+DEBUG   2017-03-21 16:23:45,696 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 2429
+INFO    2017-03-21 16:23:58,652 [main] org.apache.hive.jdbc.Utils  - Supplied authorities: 192.168.237.132:10000
+INFO    2017-03-21 16:23:58,655 [main] org.apache.hive.jdbc.Utils  - Resolved authority: 192.168.237.132:10000
+INFO    2017-03-21 16:23:58,729 [main] org.apache.hive.jdbc.HiveConnection  - Will try to open client transport with JDBC Uri: jdbc:hive2://192.168.237.132:10000
+DEBUG   2017-03-21 16:23:58,730 [main] org.apache.thrift.transport.TSaslTransport  - opening transport org.apache.thrift.transport.TSaslClientTransport@5a01ccaa
+DEBUG   2017-03-21 16:23:58,734 [main] org.apache.thrift.transport.TSaslClientTransport  - Sending mechanism name PLAIN and initial response of length 15
+DEBUG   2017-03-21 16:23:58,735 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status START and payload length 5
+DEBUG   2017-03-21 16:23:58,735 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Writing message with status COMPLETE and payload length 15
+DEBUG   2017-03-21 16:23:58,735 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Start message handled
+DEBUG   2017-03-21 16:23:58,735 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Main negotiation loop complete
+DEBUG   2017-03-21 16:23:58,735 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: SASL Client receiving last message
+DEBUG   2017-03-21 16:23:58,736 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: Received message with status COMPLETE and payload length 0
+DEBUG   2017-03-21 16:23:58,747 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 71
+DEBUG   2017-03-21 16:23:58,766 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 16:23:58,782 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 136
+DEBUG   2017-03-21 16:23:58,785 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 16:23:58,794 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 16:23:58,796 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 16:23:58,803 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 16:23:58,805 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 16:23:58,807 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 123
+DEBUG   2017-03-21 16:23:58,816 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 16:23:58,816 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 16:24:02,209 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 16:24:02,209 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 96
+DEBUG   2017-03-21 16:24:02,210 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 42
+DEBUG   2017-03-21 16:24:02,210 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 141
+DEBUG   2017-03-21 16:24:02,433 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 109
+DEBUG   2017-03-21 16:24:02,434 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 16:24:08,151 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 16:24:08,152 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+DEBUG   2017-03-21 16:24:09,416 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
+DEBUG   2017-03-21 16:24:09,649 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 102
+DEBUG   2017-03-21 16:24:09,725 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 2022
+DEBUG   2017-03-21 16:24:11,306 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 83
+DEBUG   2017-03-21 16:24:13,487 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 40

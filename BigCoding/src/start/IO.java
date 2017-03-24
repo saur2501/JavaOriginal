@@ -2,12 +2,12 @@ package start;
 
 import java.util.Scanner;
 
-import dbms.DirectoriesFile;
-import dbms.FileStreams;
-import dbms.JDBC;
-import dbms.ParseXML;
-import dbms.ReadWriteXML;
-import dbms.XMLXPath;
+import dbms.DirectoriesRW;
+import dbms.fileReads.FileStreams;
+import dbms.fileReads.ParseXML;
+import dbms.fileReads.ReadWriteXML;
+import dbms.fileReads.XMLXPath;
+import dbms.rdbms.mysql;
 
 public class IO {
 	private Scanner sc = new Scanner(System.in);
@@ -26,11 +26,11 @@ public class IO {
 				break;
 			case 2:
 				System.out.println("Directories Handling");
-				new DirectoriesFile().execute();
+				new DirectoriesRW().execute();
 				break;
 			case 3:
 				System.out.println("RDBMS Handling");
-				JDBC rdb = new JDBC();
+				mysql rdb = new mysql();
 				rdb.execute();
 				break;
 			case 4:

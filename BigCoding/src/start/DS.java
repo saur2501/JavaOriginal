@@ -1,18 +1,18 @@
 package start;
 import java.util.Scanner;
 
-import ds.AVLTree;
-import ds.ArrayQueue;
-import ds.ArrayStack;
-import ds.BinaryTreeAsIs;
-import ds.DAG;
-import ds.GraphArray;
-import ds.GraphLinkedList;
-import ds.MinHeap;
-import ds.MyArrayList;
-import ds.MyDoublyLinkedList;
-import ds.MyLinkedList;
-import ds.RBTree;
+import dsa.ds.AVLTree;
+import dsa.ds.ArrayQueue;
+import dsa.ds.ArrayStack;
+import dsa.ds.BinaryTreeAsIs;
+import dsa.ds.DAG;
+import dsa.ds.GraphArray;
+import dsa.ds.GraphLinkedList;
+import dsa.ds.MinHeap;
+import dsa.ds.MyArrayList;
+import dsa.ds.MyDoublyLinkedList;
+import dsa.ds.MyLinkedList;
+import dsa.ds.RBTree;
 
 public class DS {
 	Scanner scan = new Scanner(System.in);

@@ -58,6 +58,45 @@
 		    <artifactId>commons-cli</artifactId>
 		    <version>1.2</version>
 		</dependency>
+		
+		<!-- Hive Stuff starts -->
+		
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-jdbc</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-metastore -->
+		<dependency>
+		    <groupId>org.apache.hive</groupId>
+		    <artifactId>hive-metastore</artifactId>
+		    <version>0.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo2-api</artifactId>
+			<version>2.3-20090302111651</version>
+		</dependency>
+		<dependency>
+		    <groupId>jdk.tools</groupId>
+		    <artifactId>jdk.tools</artifactId>
+		    <version>1.8.0_112</version>
+		    <scope>system</scope>
+		    <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
+		<dependency>
+		    <groupId>org.apache.hadoop</groupId>
+		    <artifactId>hadoop-common</artifactId>
+		    <version>2.7.0</version>
+		</dependency>
+		<!-- Hive Stuff ends -->
+		<!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itextpdf</artifactId>
+		    <version>5.0.6</version>
+		</dependency>
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>

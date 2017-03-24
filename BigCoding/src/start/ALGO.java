@@ -1,8 +1,8 @@
 package start;
-import algo.dac.*;
-import algo.Backtracking;
-import algo.generalPrinciples.GeneralPrinciples;
-
+import dsa.algo.dac.*;
+import dsa.algo.Backtracking;
+import dsa.algo.dac.DAC;
+import dsa.algo.generalPrinciples.GeneralPrinciples;
 
 import java.util.*;
 
