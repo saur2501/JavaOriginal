@@ -1,0 +1,56 @@
+--using topological sort for the DAG UML 
+	directed edge from 1 to many side relp
+	keep DAG handy in case of insertion, deletion queries.
+--Cardinality of relationships
+	association- m:n
+		make a new entity for 2 0..1:0..m aggregation relp
+	aggregation- 0..1:0..*
+		make an fk refering lhs
+		logic- an rhs entity will (may) have corresponding on lhs.
+	composition- 1:0..*
+		make a not null fk refering lhs
+		logic- an rhs entity can't exist indpd without being contained inside lhs.
+	inheritance- 1:0..1 (eg- user seller)
+		also- 1 order has 1 payment and 1 payment belongs to 1 order- payment has fk and unique.
+		make a not null and unique fk refering lhs
+		logic- only not null fk doesn't stop me from making another seller pointing to a same user.
+	strong inheritance- 1:0..1 (Eg- payment mode can be wallet, cash, cardDetails, nth more)
+		make a not null and unique fk refering lhs and the rhs must use enumerator (not null) to pick a subclass.
+		Problem- still no1 stops you from destroying mutual exclusion- payment id can appear for both card and wallet 
+			OR payment mode may have mismatch with actual entry- my application program will ensure but RDBMS doesn't safeguard in schema.
+			Solution- use assert and trigger statements when doing addition.
+	Constraints with 1 on both side like 1:1..n or 1:1- can't be expressed in foolproof way
+		eg- 1 user can have 1 or more wallets but 1 wallet belongs to only 1 user.
+		logic- what came first egg or hen. both sides will want not null constaint and no entity can get registered.
+		solution- negotiate on priority and decide.
+Product
+	pid int, name varchar
+Brand
+	bid int, name varchar
+BrandedProduct
+	bpid int, name varchar, pid fk, bid fk
+User
+	uid int, name varchar
+Seller
+	sid int, uid fk not null
+Seller_Proposals
+	spid int, sid fk, bid fk
+Item
+	iid int, rfid int, bpid fk not null, sid fk
+City_Incharge
+	ciid int, city varchar
+Order
+	oid int, total double, uid fk not null, status int
+	--status like inactive, active, finished
+All_Choices
+	acid int, oid fk not null, spid fk, bpid fk
+	constraint- exactly one of spid or bpid must be null
+Payment
+	pmid int, paymentType int enum (1,2,3), oid fk
+--not writing not null cuz 7 can make donations
+Wallet
+	wid int, uid fk not null, money int, pmid fk not null unique
+CardDetails
+	cdid int, cardNo varchar, uid fk not null, pmid fk not null unique
+Cash
+	cid int, amount double, pmid fk not null unique

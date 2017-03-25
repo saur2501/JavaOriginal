@@ -31,7 +31,7 @@ public class IO {
 			case 3:
 				System.out.println("RDBMS Handling");
 				mysql rdb = new mysql();
-				rdb.execute();
+				//rdb.execute();
 				break;
 			case 4:
 				System.out.println("XML Handling");

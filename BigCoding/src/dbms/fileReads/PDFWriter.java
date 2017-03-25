@@ -37,7 +37,7 @@ public class PDFWriter
 	       document.addSubject("An example to show how attributes can be added to pdf files.");
 	    
 	       //Add Image
-	       Image image1 = Image.getInstance("temp.jpg");
+	       Image image1 = Image.getInstance("images/temp.jpg");
 	       //Fixed Positioning
 	       image1.setAbsolutePosition(100f, 550f);
 	       //Scale to new height and new width of image
