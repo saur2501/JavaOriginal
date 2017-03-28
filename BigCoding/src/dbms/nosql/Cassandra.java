@@ -21,6 +21,8 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.ResultSetFuture;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.SimpleStatement;
+import com.datastax.driver.core.Statement;
 import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
 import com.datastax.driver.core.policies.TokenAwarePolicy;
@@ -98,8 +100,7 @@ public class Cassandra {
 		            .build();
 		    Session session = cluster.connect();                                           // cluster.connect(DBNAME)
 		    session.execute("use TLG_V_2;");
-		    ResultSet rs = session.execute("Select * from testCassandraStore limit 10");					//SELECT cluster_name, listen_address FROM system.local;
-		    		//CREATE TABLE monkeySpecies (species text PRIMARY KEY,common_name text,population varint,average_size int ) WITH comment='Important biological records' AND read_repair_chance = 1.0;");    // (3)
+		    ResultSet rs = session.execute("Select * from testCassandraStore limit 10");					//SELECT cluster_name, listen_address FROM system.local; CREATE TABLE monkeySpecies (species text PRIMARY KEY,common_name text,population varint,average_size int ) WITH comment='Important biological records' AND read_repair_chance = 1.0;");
 		    Row row = rs.one();
 		    System.out.println(row.getString("meastype"));                          	// (4)
 		} finally {
@@ -122,3 +123,7 @@ public class Cassandra {
 		cluster.close();
 	}
 }
+
+/*String queryString = "Select * from testCassandraStore limit 10";
+Statement queryStatement = new SimpleStatement(queryString);
+ResultSet rs = session.execute(queryStatement);*/

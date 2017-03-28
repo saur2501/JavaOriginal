@@ -54,3 +54,33 @@ public class Influx {
 		//influxDB.deleteDatabase(dbName);
 	}
 }
+
+
+/*
+ * int i = 0;
+	String rowkey_value = "";
+	Object[] keys = rowKeyInfo.keySet().toArray();
+	for (Result row : queryResult.getResults()) {
+		Series series = row.getSeries().get(i);
+		System.out.println("Series = ");
+		System.out.println("Table Name = " + series.getName());
+		System.out.println("Row Keys = " + series.getColumns());
+		System.out.println("Tags used = " + series.getTags());
+		System.out.println("Values = " + series.getValues());
+		i++;
+		for(int k = 0; k < series.getValues().size();k++) {
+			List<Object> list = series.getValues().get(k);
+			System.out.println(k + "th row = " + list.toString());
+			rowkey_value = "";
+			for(int j = 0; j < series.getColumns().size() - 1; j++) {
+				logger.trace(j + "th Value is = " + list.get(j));
+				rowkey_value = rowkey_value + (String) list.get(j) + rowKeySeperator;
+				logger.trace("rowkey_value becomes = " + rowkey_value);
+			}
+			System.out.println(k + "th value b4 adding = " + rowkey_value);
+			setOfRowkeys.add(rowkey_value.substring(0, rowkey_value.length() - 1));				//Remove the last rowKeySeperator symbol before adding to the set.
+		}
+	}
+
+ *  
+ *  */

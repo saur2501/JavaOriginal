@@ -39,7 +39,7 @@ public class DateClass {
 	ZoneId zone1 = ZoneId.systemDefault();										//Asia/Calcutta
 	ZoneId zone2 = ZoneId.of("Asia/Tokyo");
 	LocalDate localDate = LocalDate.now();										//2017-03-10
-	localDate = LocalDate.of(2017, 1, 13);										//2017-01-13
+	localDate = LocalDate.of(2017, 1, 13);			 							//2017-01-13
 	LocalDateTime localDateTime = LocalDateTime.now();							//2017-03-10T01:53:48.733
 	LocalTime localTime1 = LocalTime.now();										//01:53:00.013
 	LocalTime localTime2 = LocalTime.now(zone2);
@@ -59,7 +59,7 @@ public class DateClass {
 	//Print them
     System.out.println("Local Date : " + localDate);
     System.out.println(zone1.getId());
-    System.out.println(zone2.getDisplayName(TextStyle.FULL, Locale.ROOT));
+    System.out.println(zone2.getDisplayName(TextStyle.FULL, Locale.ROOT)); 
     //Print Parts
     DayOfWeek dayOfWeek = DayOfWeek.from(localDate);
     System.out.println("Day : " + dayOfWeek.getValue() + "(Ordinal=" + dayOfWeek.ordinal() + ") , " + dayOfWeek.get(ChronoField.DAY_OF_WEEK));
@@ -105,7 +105,6 @@ public class DateClass {
     Clock clock = Clock.offset(c1, d);														//OffsetClock[SystemClock[Z],PT5H]
     System.out.println(clock.instant());													//Asia/Calcutta
     ZonedDateTime zone = ZonedDateTime.parse("2016-10-05T08:20:10+05:30[Asia/Kolkata]");	//2016-10-05T08:20:10+05:30[Asia/Kolkata]  
-    
     ZonedDateTime zonedDateTime= ZonedDateTime.now();										//2017-03-10T02:21:02.982+05:30[Asia/Calcutta]
     ZonedDateTime p = zonedDateTime.plus(Period.ofDays(126));  
     System.out.println(p);  
