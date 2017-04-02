@@ -1,5 +1,5 @@
 package maths.ps;
-
+//TODO
 public class Probability {
 	public static void main(String[] args) {
 		//given favorable and possible outcomes of each- tell MEX, exhaustive

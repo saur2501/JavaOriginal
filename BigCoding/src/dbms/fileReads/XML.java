@@ -86,7 +86,6 @@ class Lesson46 {
 		} 
 		
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -188,3 +187,17 @@ class Lesson46 {
  * 
  * 
  * */
+
+
+
+//TODO- SAXParser implementation
+/*
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+File inputFile = new File(OWLParser.owlFileName);
+SAXParserFactory factory = SAXParserFactory.newInstance();
+SAXParser saxParser = factory.newSAXParser();
+OWLHandler owlhandler = new OWLHandler();
+owlhandler.setOutputFilePath(OWLParser.cypherFileName);
+saxParser.parse(inputFile, owlhandler);
+*/

@@ -1,5 +1,5 @@
 package maths.dm;
-
+//TODO
 public class DiscreteMaths {
 	public static void main(String[] args) {
 		//applying logic in english language
