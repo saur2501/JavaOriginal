@@ -18,6 +18,7 @@ public class Lesson24 extends JFrame {
 
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Lesson24() {
 
 		this.setSize(400, 400);

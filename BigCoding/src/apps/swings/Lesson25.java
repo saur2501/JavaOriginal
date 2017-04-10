@@ -20,7 +20,8 @@ public class Lesson25 extends JFrame{
          
     }
      
-    public Lesson25(){
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public Lesson25(){
          
         this.setSize(400,400);
          

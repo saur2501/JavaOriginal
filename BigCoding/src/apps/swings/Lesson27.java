@@ -1,415 +1,241 @@
 package apps.swings;
-import javax.swing.*;
 
- 
+import javax.swing.*;
 
 import java.awt.event.*;
 
- 
-
 import java.awt.Dimension;
-
- 
 
 // Enumerations are used to store related items together
 
- 
-
 import java.util.Enumeration;
-
- 
 
 import javax.swing.tree.*;
 
- 
+public class Lesson27 extends JFrame {
 
-public class Lesson27 extends JFrame{
+	private static final long serialVersionUID = 1L;
 
- 
+	JButton button1;
 
-    JButton button1;
+	String outputString = "";
 
-    String outputString = "";
+	// A Tree contains nodes that can contain other nodes
 
-     
+	JTree theTree;
 
-    // A Tree contains nodes that can contain other nodes
+	// If a node holds other nodes it is called a parent node
 
-     
+	// The nodes inside of a parent node are children nodes
 
-    JTree theTree;
+	// Nodes on the same level are called siblings
 
-     
+	DefaultMutableTreeNode documents, work, games, emails;
 
-    // If a node holds other nodes it is called a parent node
+	DefaultMutableTreeNode fileSystem = new DefaultMutableTreeNode("C Drive");
 
-    // The nodes inside of a parent node are children nodes
+	public static void main(String[] args) {
 
-    // Nodes on the same level are called siblings
+		new Lesson27();
 
-     
+	}
 
-    DefaultMutableTreeNode documents, work, games, emails;
+	public Lesson27() {
 
-     
+		this.setSize(400, 400);
 
-    DefaultMutableTreeNode fileSystem = new DefaultMutableTreeNode("C Drive");
+		this.setLocationRelativeTo(null);
 
-     
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    public static void main(String[] args){
+		this.setTitle("My Sixth Frame");
 
-         
+		JPanel thePanel = new JPanel();
 
-        new Lesson27();
+		// Create a button
 
-         
+		button1 = new JButton("Get Answer");
 
-    }
+		ListenForButton lForButton = new ListenForButton();
 
-     
+		button1.addActionListener(lForButton);
 
-    public Lesson27(){
+		thePanel.add(button1);
 
-         
+		// Create the JTree by passing it the top tree node
 
-        this.setSize(400,400);
+		theTree = new JTree(fileSystem);
 
-         
+		// Makes sure only one item can be selected at a time
 
-        this.setLocationRelativeTo(null);
+		// By default you can make multiple selections
 
-         
+		theTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Only show 8 rows of the tree at a time
 
-         
+		theTree.setVisibleRowCount(8);
 
-        this.setTitle("My Sixth Frame");
+		// Add the items to the tree documents, work, games
 
-         
+		// We first add the documents parent node
 
-        JPanel thePanel = new JPanel();
+		documents = addAFile("Docs", fileSystem);
 
-         
+		// Now we add children nodes to the documents parent node
 
-        // Create a button
+		addAFile("Taxes.exl", documents);
 
-         
+		emails = addAFile("Emails", documents);
 
-        button1 = new JButton("Get Answer");
+		addAFile("Story.txt", documents);
 
-         
+		addAFile("Schedule.txt", documents);
 
-        ListenForButton lForButton = new ListenForButton();
+		// Add a child node to the email node
 
-         
+		addAFile("CallBob.txt", emails);
 
-        button1.addActionListener(lForButton);
+		// Create the work node and its children
 
-         
+		work = addAFile("Work Applications", fileSystem);
 
-        thePanel.add(button1);
+		addAFile("Spreadsheet.exe", work);
 
-         
+		addAFile("Wordprocessor.exe", work);
 
-        // Create the JTree by passing it the top tree node
+		addAFile("Presentation.exe", work);
 
-         
+		// Create the games node and its children
 
-        theTree = new JTree(fileSystem);
+		games = addAFile("Games", fileSystem);
 
-         
+		addAFile("SpaceInvaders.exe", games);
 
-        // Makes sure only one item can be selected at a time
+		addAFile("PacMan.exe", games);
 
-        // By default you can make multiple selections
+		// Put the tree in a scroll component
 
-         
+		JScrollPane scrollBox = new JScrollPane(theTree);
 
-        theTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		// Set the size for the JScrollPane so that everything fits
 
-         
+		Dimension d = scrollBox.getPreferredSize();
 
-        // Only show 8 rows of the tree at a time
+		d.width = 200;
 
-         
+		scrollBox.setPreferredSize(d);
 
-        theTree.setVisibleRowCount(8);
+		thePanel.add(scrollBox);
 
-         
+		this.add(thePanel);
 
-        // Add the items to the tree documents, work, games
+		this.setVisible(true);
 
-        // We first add the documents parent node
+	}
 
-         
+	private DefaultMutableTreeNode addAFile(String fileName, DefaultMutableTreeNode parentFolder) {
 
-        documents = addAFile("Docs", fileSystem);
+		// Creates a new node for the tree
 
-         
+		DefaultMutableTreeNode newFile = new DefaultMutableTreeNode(fileName);
 
-        // Now we add children nodes to the documents parent node
+		// Add attaches a name to the node
 
-         
+		parentFolder.add(newFile);
 
-        addAFile("Taxes.exl", documents);
+		// return the new node
 
-        emails = addAFile("Emails", documents);
+		return newFile;
 
-        addAFile("Story.txt", documents);
+	}
 
-        addAFile("Schedule.txt", documents);
+	private class ListenForButton implements ActionListener {
 
-         
+		@SuppressWarnings("rawtypes")
+		public void actionPerformed(ActionEvent e) {
 
-        // Add a child node to the email node
+			if (e.getSource() == button1) {
 
-         
+				// How to get the selected node
 
-        addAFile("CallBob.txt", emails);
+				// Returns the last selected node in the tree
 
-         
+				Object treeObject = theTree.getLastSelectedPathComponent();
 
-        // Create the work node and its children
+				// Cast the Object into a DefaultMutableTreeNode
 
-         
+				DefaultMutableTreeNode theFile = (DefaultMutableTreeNode) treeObject;
 
-        work = addAFile("Work Applications", fileSystem);
+				// Returns the object stored in this node and casts it to a
+				// string
 
-        addAFile("Spreadsheet.exe", work);
+				String treeNode = (String) theFile.getUserObject();
 
-        addAFile("Wordprocessor.exe", work);
+				outputString = "The Selected Node: " + treeNode + "\n";
 
-        addAFile("Presentation.exe", work);
+				// Get the number of children this node has
 
-         
+				outputString += "Number of Children: " + theFile.getChildCount() + "\n";
 
-        // Create the games node and its children
+				// Get the number of siblings
 
-         
+				outputString += "Number of Siblings: " + theFile.getSiblingCount() + "\n";
 
-        games = addAFile("Games", fileSystem);
+				// Get the parent of this node
 
-        addAFile("SpaceInvaders.exe", games);
+				outputString += "The parent: " + theFile.getParent() + "\n";
 
-        addAFile("PacMan.exe", games);
+				// Get the next node
 
-         
+				outputString += "Next Node: " + theFile.getNextNode() + "\n";
 
-        // Put the tree in a scroll component
+				// Get the previous node
 
-         
+				outputString += "Next Node: " + theFile.getPreviousNode() + "\n";
 
-        JScrollPane scrollBox = new JScrollPane(theTree);
+				// Get the children for the node
 
-         
+				outputString += "\nChildren of Node\n";
 
-        // Set the size for the JScrollPane so that everything fits
+				// children() returns an enumeration that contains all the
+				// children
 
-         
+				// This for loop will continue to run as long as there are more
+				// elements
 
-        Dimension d = scrollBox.getPreferredSize();
+				// nextElement() returns the next element in the list
 
-        d.width = 200;
+				for (Enumeration enumValue = theFile.children(); enumValue.hasMoreElements();) {
 
-        scrollBox.setPreferredSize(d);
+					outputString += enumValue.nextElement() + "\n";
 
-         
+				}
 
-        thePanel.add(scrollBox);
+				// Get the path from the root
 
-         
+				outputString += "\nPath From Root\n";
 
-        this.add(thePanel);
+				// getPath returns an array of TreeNodes
 
-         
+				TreeNode[] pathNodes = theFile.getPath();
 
-        this.setVisible(true);
+				// Cycle through the TreeNodes
 
-     
+				for (TreeNode indivNodes : pathNodes) {
 
-    }
+					outputString += indivNodes + "\n";
 
-     
+				}
 
-    private DefaultMutableTreeNode addAFile(String fileName, DefaultMutableTreeNode parentFolder){
+				JOptionPane.showMessageDialog(Lesson27.this, outputString, "Information",
+						JOptionPane.INFORMATION_MESSAGE);
 
-         
+				outputString = "";
 
-        // Creates a new node for the tree
+			}
 
-        DefaultMutableTreeNode newFile = new DefaultMutableTreeNode(fileName);
+		}
 
-         
-
-        // Add attaches a name to the node
-
-         
-
-        parentFolder.add(newFile);
-
-         
-
-        // return the new node
-
-         
-
-        return newFile;
-
-         
-
-    }
-
-     
-
-    private class ListenForButton implements ActionListener{
-
-         
-
-        public void actionPerformed(ActionEvent e){
-
-         
-
-            if(e.getSource() == button1){
-
-                 
-
-                // How to get the selected node
-
-                // Returns the last selected node in the tree
-
-                Object treeObject = theTree.getLastSelectedPathComponent();
-
-                 
-
-                // Cast the Object into a DefaultMutableTreeNode
-
-                 
-
-                DefaultMutableTreeNode theFile = (DefaultMutableTreeNode) treeObject;
-
-                 
-
-                // Returns the object stored in this node and casts it to a string
-
-                 
-
-                String treeNode = (String) theFile.getUserObject();
-
-                 
-
-                outputString = "The Selected Node: " + treeNode + "\n";
-
-                 
-
-                // Get the number of children this node has
-
-                 
-
-                outputString += "Number of Children: " + theFile.getChildCount() + "\n";
-
-                 
-
-                // Get the number of siblings
-
-                 
-
-                outputString += "Number of Siblings: " + theFile.getSiblingCount() + "\n";
-
-                 
-
-                // Get the parent of this node
-
-                 
-
-                outputString += "The parent: " + theFile.getParent() + "\n";
-
-                 
-
-                // Get the next node
-
-                 
-
-                outputString += "Next Node: " + theFile.getNextNode() + "\n";
-
-                 
-
-                // Get the previous node
-
-                 
-
-                outputString += "Next Node: " + theFile.getPreviousNode() + "\n";
-
-                 
-
-                // Get the children for the node
-
-                 
-
-                outputString += "\nChildren of Node\n";
-
-                 
-
-                // children() returns an enumeration that contains all the children
-
-                // This for loop will continue to run as long as there are more elements
-
-                // nextElement() returns the next element in the list
-
-                 
-
-                for (Enumeration enumValue = theFile.children(); enumValue.hasMoreElements(); ) {
-
-                 
-
-                    outputString += enumValue.nextElement() + "\n";
-
-                     
-
-                }
-
-                 
-
-                // Get the path from the root
-
-                 
-
-                outputString += "\nPath From Root\n";
-
-                 
-
-                // getPath returns an array of TreeNodes
-
-                 
-
-                TreeNode[] pathNodes = theFile.getPath();
-
-                 
-
-                // Cycle through the TreeNodes
-
-                 
-
-                for(TreeNode indivNodes: pathNodes){
-
-                    outputString += indivNodes + "\n";
-
-                }
-
-                 
-
-                JOptionPane.showMessageDialog(Lesson27.this, outputString, "Information", JOptionPane.INFORMATION_MESSAGE);
-
-                 
-
-                outputString = "";
-
-                 
-
-            }
-
-        }
-
-    }
+	}
 }
