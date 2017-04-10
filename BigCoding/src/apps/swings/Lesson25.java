@@ -3,12 +3,15 @@ import javax.swing.*;
  
 import java.awt.event.*;
  
+@SuppressWarnings("serial")
 public class Lesson25 extends JFrame{
      
     JButton button1;
     String infoOnComponent = "";
-    JList favoriteMovies, favoriteColors;
-    DefaultListModel defListModel = new DefaultListModel();
+    @SuppressWarnings("rawtypes")
+	JList favoriteMovies, favoriteColors;
+    @SuppressWarnings("rawtypes")
+	DefaultListModel defListModel = new DefaultListModel();
     JScrollPane scroller;
      
     public static void main(String[] args){

@@ -1,117 +1,120 @@
 package apps.swings;
+
 import javax.swing.*;
 
 import java.awt.event.*;
 
-public class Lesson24 extends JFrame{
+@SuppressWarnings("serial")
+public class Lesson24 extends JFrame {
 
-    JComboBox favoriteShows;
-    JButton button1;
-    String infoOnComponent = "";
+	@SuppressWarnings("rawtypes")
+	JComboBox favoriteShows;
+	JButton button1;
+	String infoOnComponent = "";
 
-    public static void main(String[] args){
+	public static void main(String[] args) {
 
-        new Lesson24();
+		new Lesson24();
 
-    }
+	}
 
-    public Lesson24(){
+	public Lesson24() {
 
-        this.setSize(400,400);
+		this.setSize(400, 400);
 
-        this.setLocationRelativeTo(null);
+		this.setLocationRelativeTo(null);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setTitle("My Fourth Frame");
+		this.setTitle("My Fourth Frame");
 
-        JPanel thePanel = new JPanel();
+		JPanel thePanel = new JPanel();
 
-        // Create an array that will be added to the combo box
+		// Create an array that will be added to the combo box
 
-        String[] shows = {"Breaking Bad", "Life on Mars", "Doctor Who"};
+		String[] shows = { "Breaking Bad", "Life on Mars", "Doctor Who" };
 
-        // Create a combo box and add the array of shows
+		// Create a combo box and add the array of shows
 
-        favoriteShows = new JComboBox(shows);
+		favoriteShows = new JComboBox(shows);
 
-        // Add an item to the combo box
+		// Add an item to the combo box
 
-        favoriteShows.addItem("Pushing Daisies");
+		favoriteShows.addItem("Pushing Daisies");
 
-        thePanel.add(favoriteShows);
+		thePanel.add(favoriteShows);
 
-        // Create a button
+		// Create a button
 
-        button1 = new JButton("Get Answer");
+		button1 = new JButton("Get Answer");
 
-        ListenForButton lForButton = new ListenForButton();
+		ListenForButton lForButton = new ListenForButton();
 
-        button1.addActionListener(lForButton);
+		button1.addActionListener(lForButton);
 
-        thePanel.add(button1);
+		thePanel.add(button1);
 
-        this.add(thePanel);
+		this.add(thePanel);
 
-        this.setVisible(true);
+		this.setVisible(true);
 
-        // Add an item to a combo box at index 1
+		// Add an item to a combo box at index 1
 
-        favoriteShows.insertItemAt("Dexter", 1);
+		favoriteShows.insertItemAt("Dexter", 1);
 
-        // Only show 3 items at a time
+		// Only show 3 items at a time
 
-        favoriteShows.setMaximumRowCount(3);
+		favoriteShows.setMaximumRowCount(3);
 
-        // Remove the item named Dexter
+		// Remove the item named Dexter
 
-        //favoriteShows.removeItem("Dexter");
+		// favoriteShows.removeItem("Dexter");
 
-        // Remove the item at index 1
+		// Remove the item at index 1
 
-        //favoriteShows.removeItemAt(1);
+		// favoriteShows.removeItemAt(1);
 
-        // Remove all items
+		// Remove all items
 
-        // favoriteShows.removeAllItems();
+		// favoriteShows.removeAllItems();
 
-            }
+	}
 
-        private class ListenForButton implements ActionListener{
+	private class ListenForButton implements ActionListener {
 
-            public void actionPerformed(ActionEvent e){
+		public void actionPerformed(ActionEvent e) {
 
-                if(e.getSource() == button1){
+			if (e.getSource() == button1) {
 
+				favoriteShows.setEditable(true);
 
-                    favoriteShows.setEditable(true);
+				// Get item at index 0
 
-                    // Get item at index 0
+				infoOnComponent = "Item at 0: " + favoriteShows.getItemAt(0) + "\n";
 
-                    infoOnComponent = "Item at 0: " + favoriteShows.getItemAt(0) + "\n";
+				// Get the number of items in the combo box
 
-                    // Get the number of items in the combo box
+				infoOnComponent += "Num of Shows: " + favoriteShows.getItemCount() + "\n";
 
-                    infoOnComponent += "Num of Shows: " + favoriteShows.getItemCount() + "\n";
+				// Get the index for the selected item
 
-                    // Get the index for the selected item
+				infoOnComponent += "Selected ID: " + favoriteShows.getSelectedIndex() + "\n";
 
-                    infoOnComponent += "Selected ID: " + favoriteShows.getSelectedIndex() + "\n";
+				// Get the value for the selected item
 
-                    // Get the value for the selected item
+				infoOnComponent += "Selected Show: " + favoriteShows.getSelectedItem() + "\n";
 
-                    infoOnComponent += "Selected Show: " + favoriteShows.getSelectedItem() + "\n";
+				// Find out if the values in the combo box are editable
 
-                    // Find out if the values in the combo box are editable
+				infoOnComponent += "Combo Box Editable: " + favoriteShows.isEditable() + "\n";
 
-                    infoOnComponent += "Combo Box Editable: " + favoriteShows.isEditable() + "\n";
+				JOptionPane.showMessageDialog(Lesson24.this, infoOnComponent, "Information",
+						JOptionPane.INFORMATION_MESSAGE);
 
-                    JOptionPane.showMessageDialog(Lesson24.this, infoOnComponent, "Information", JOptionPane.INFORMATION_MESSAGE);
+				infoOnComponent = "";
 
-                    infoOnComponent = "";
-
-                }
-            }
-        }
+			}
+		}
+	}
 
 }

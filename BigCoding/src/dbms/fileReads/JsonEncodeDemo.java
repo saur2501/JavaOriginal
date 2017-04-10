@@ -2,7 +2,6 @@ package dbms.fileReads;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.text.ParseException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 
 public class JsonEncodeDemo {
 
+	@SuppressWarnings("unchecked")
 	public void write(){
 		JSONObject obj = new JSONObject();
 

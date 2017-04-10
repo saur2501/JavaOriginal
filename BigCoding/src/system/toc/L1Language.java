@@ -3,6 +3,7 @@ package system.toc;
 public class L1Language {
 
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		String regex = "a*b";
 		//generate sample strings
 		//make a grammar for this

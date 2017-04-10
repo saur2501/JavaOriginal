@@ -4,7 +4,7 @@ import java.io.*;
  *  Important information is normally separated by a comma, space, or tab.*/
 
 public class Lesson32{
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         Customer[] customers = getCustomers();		//Create an array of type Customer
         PrintWriter custOutput = createFile("/Users/derekbanas/Documents/workspace3/Java Code/src/customers.txt");		//PrintWriter is used to write characters to a file in this situation
         for(Customer person : customers){			//Enhanced for loop for arrays; Cycles through all of the people in the customers array
@@ -52,11 +52,12 @@ public class Lesson32{
         custOutput.println(custInfo);				//Writes the string to the file
     }
 
-    private static void getFileInfo(){				//Read info from the file and write it to the screen
+    private static void getFileInfo() throws IOException{				//Read info from the file and write it to the screen
         System.out.println("Info Written to File\n");
         File listOfNames = new File("/Users/derekbanas/Documents/workspace3/Java Code/src/customers.txt");		//Open a new connection to the file
+        BufferedReader getInfo = null;
         try {
-            BufferedReader getInfo = new BufferedReader(new FileReader(listOfNames));	//FileReader reads character files. BufferedReader reads as many characters as possible
+            getInfo = new BufferedReader(new FileReader(listOfNames));	//FileReader reads character files. BufferedReader reads as many characters as possible
             String custInfo = getInfo.readLine();	//Reads a whole line from the file and saves it in a String
             while(custInfo != null){				//readLine returns null when the end of the file is reached
                 // System.out.println(custInfo);
@@ -73,6 +74,8 @@ public class Lesson32{
         catch(IOException e){
             System.out.println("An I/O Error Occurred");
             System.exit(0);
+        } finally {
+        	getInfo.close();
         }
     }
 }

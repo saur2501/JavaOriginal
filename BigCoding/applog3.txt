@@ -1,0 +1,8 @@
+DEBUG   2017-04-05 14:23:21,782 [main] io.Log4J  - this is a debug log message from invokeProgrammatically
+INFO    2017-04-05 14:23:21,782 [main] io.Log4J  - this is a information log message from invokeProgrammatically
+WARN    2017-04-05 14:23:21,782 [main] io.Log4J  - this is a warning log message from invokeProgrammatically
+INFO    2017-04-05 14:23:21,782 [main] io.Log4J  - This is my first log4j's statement from invokeByPropertiesFile
+DEBUG   2017-04-05 14:24:27,015 [main] io.Log4J  - this is a debug log message from invokeProgrammatically
+INFO    2017-04-05 14:24:27,015 [main] io.Log4J  - this is a information log message from invokeProgrammatically
+WARN    2017-04-05 14:24:27,015 [main] io.Log4J  - this is a warning log message from invokeProgrammatically
+INFO    2017-04-05 14:24:27,015 [main] io.Log4J  - This is my first log4j's statement from invokeByPropertiesFile

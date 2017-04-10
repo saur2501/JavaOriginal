@@ -334,3 +334,19 @@ DEBUG   2017-03-21 16:24:09,649 [main] org.apache.thrift.transport.TSaslTranspor
 DEBUG   2017-03-21 16:24:09,725 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 2022
 DEBUG   2017-03-21 16:24:11,306 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 83
 DEBUG   2017-03-21 16:24:13,487 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 40
+INFO    2017-04-05 14:23:21,780 [main] io.Log4J  - This is my first log4j's statement from invokeByDefault
+DEBUG   2017-04-05 14:23:21,782 [main] io.Log4J  - this is a debug log message from invokeProgrammatically
+INFO    2017-04-05 14:23:21,782 [main] io.Log4J  - this is a information log message from invokeProgrammatically
+WARN    2017-04-05 14:23:21,782 [main] io.Log4J  - this is a warning log message from invokeProgrammatically
+INFO    2017-04-05 14:23:21,782 [main] io.Log4J  - This is my first log4j's statement from invokeByPropertiesFile
+DEBUG   2017-04-05 14:23:21,798 [main] io.Log4J  - this is a debug log message from invokeByXml
+INFO    2017-04-05 14:23:21,798 [main] io.Log4J  - this is a information log message from invokeByXml
+WARN    2017-04-05 14:23:21,798 [main] io.Log4J  - this is a warning log message from invokeByXml
+INFO    2017-04-05 14:24:27,013 [main] io.Log4J  - This is my first log4j's statement from invokeByDefault
+DEBUG   2017-04-05 14:24:27,015 [main] io.Log4J  - this is a debug log message from invokeProgrammatically
+INFO    2017-04-05 14:24:27,015 [main] io.Log4J  - this is a information log message from invokeProgrammatically
+WARN    2017-04-05 14:24:27,015 [main] io.Log4J  - this is a warning log message from invokeProgrammatically
+INFO    2017-04-05 14:24:27,015 [main] io.Log4J  - This is my first log4j's statement from invokeByPropertiesFile
+DEBUG   2017-04-05 14:24:27,030 [main] io.Log4J  - this is a debug log message from invokeByXml
+INFO    2017-04-05 14:24:27,030 [main] io.Log4J  - this is a information log message from invokeByXml
+WARN    2017-04-05 14:24:27,030 [main] io.Log4J  - this is a warning log message from invokeByXml

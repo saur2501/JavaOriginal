@@ -1,11 +1,11 @@
 package start;
 
 import java.util.Scanner;
-import dbms.*;
 import dbms.fileReads.JsonEncodeDemo;
 
 public class Start {
 	private static Scanner sc = new Scanner(System.in);
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		int code;
 		JsonEncodeDemo jed = new JsonEncodeDemo();

@@ -12,8 +12,6 @@ import javax.swing.*;
 
 import javax.swing.border.Border;
 
- 
-
 import java.awt.Dimension;
 
 import java.awt.FlowLayout;
@@ -22,472 +20,312 @@ import java.awt.LayoutManager;
 
 import java.awt.event.*;
 
- 
-
 // In swing you use a JFrame, to make the program
 
 // work online you use JApplet
 
- 
+public class Lesson40 extends JApplet {
 
-public class Lesson40 extends JApplet{
+	// The main panel that holds everything
 
-     
+	private static final long serialVersionUID = 1L;
 
-    // The main panel that holds everything
+	JPanel thePanel;
 
-     
+	// The panels that hold the radio buttons
 
-    JPanel thePanel;
+	JPanel ques1Panel, ques2Panel, ques3Panel, ques4Panel;
 
-     
+	// When clicked the personality report is displayed
 
-    // The panels that hold the radio buttons
+	JButton getResultBut;
 
-     
+	// The radio buttons for each personality quirk
 
-    JPanel ques1Panel, ques2Panel, ques3Panel, ques4Panel;
+	JRadioButton extravertRadio, introvertRadio,
 
-     
+			sensorRadio, intuitiveRadio, feelerRadio,
 
-    // When clicked the personality report is displayed
+			thinkerRadio, judgingRadio, perceivingRadio;
 
-     
+	// Holds the personality report
 
-    JButton getResultBut;
+	JEditorPane yourReport;
 
-     
+	// You use init() instead of main() with Applets
 
-    // The radio buttons for each personality quirk
+	public void init() {
 
-     
+		// Sets the size of the frame
 
-    JRadioButton extravertRadio, introvertRadio,
+		this.setSize(675, 870);
 
-        sensorRadio, intuitiveRadio, feelerRadio,
+		// Creates the main panel and makes everything justify left
 
-        thinkerRadio, judgingRadio, perceivingRadio;
+		thePanel = new JPanel((LayoutManager) new FlowLayout(FlowLayout.LEFT));
 
-     
+		// The panels for the radio buttons
 
-    // Holds the personality report
+		ques1Panel = new JPanel();
 
-     
+		ques2Panel = new JPanel();
 
-    JEditorPane yourReport;
+		ques3Panel = new JPanel();
 
-     
+		ques4Panel = new JPanel();
 
-    // You use init() instead of main() with Applets
+		// Creates borders that surround the radio buttons
 
-     
+		Border border1 = BorderFactory.createTitledBorder("Do you prefer to work");
 
-    public void init(){
+		Border border2 = BorderFactory.createTitledBorder("Which is most important");
 
-         
+		Border border3 = BorderFactory.createTitledBorder("Do you act on");
 
-        // Sets the size of the frame
+		Border border4 = BorderFactory.createTitledBorder("Which do you prefer");
 
-         
+		// Attaches the border to the right panels
 
-        this.setSize(675, 870);
+		ques1Panel.setBorder(border1);
 
-         
+		ques2Panel.setBorder(border2);
 
-        // Creates the main panel and makes everything justify left
+		ques3Panel.setBorder(border3);
 
-         
+		ques4Panel.setBorder(border4);
 
-        thePanel = new JPanel((LayoutManager) new FlowLayout(FlowLayout.LEFT));
+		// Makes are only one radio button can be selected
 
-         
+		ButtonGroup group1 = new ButtonGroup();
 
-        // The panels for the radio buttons
+		ButtonGroup group2 = new ButtonGroup();
 
-         
+		ButtonGroup group3 = new ButtonGroup();
 
-        ques1Panel = new JPanel();
+		ButtonGroup group4 = new ButtonGroup();
 
-        ques2Panel = new JPanel();
+		// Creates and sets text for radio buttons
 
-        ques3Panel = new JPanel();
+		extravertRadio = new JRadioButton("In groups");
 
-        ques4Panel = new JPanel();
+		introvertRadio = new JRadioButton("On your own");
 
-         
+		sensorRadio = new JRadioButton("The specifics");
 
-        // Creates borders that surround the radio buttons
+		intuitiveRadio = new JRadioButton("The big picture");
 
-         
+		feelerRadio = new JRadioButton("What feels right");
 
-        Border border1 = BorderFactory.createTitledBorder("Do you prefer to work");
+		thinkerRadio = new JRadioButton("List of facts");
 
-        Border border2 = BorderFactory.createTitledBorder("Which is most important");
+		judgingRadio = new JRadioButton("To plan");
 
-        Border border3 = BorderFactory.createTitledBorder("Do you act on");
+		perceivingRadio = new JRadioButton("To adapt");
 
-        Border border4 = BorderFactory.createTitledBorder("Which do you prefer");
+		// Sets some radio buttons to true by default
 
-         
+		extravertRadio.setSelected(true);
 
-        // Attaches the border to the right panels
+		sensorRadio.setSelected(true);
 
-         
+		feelerRadio.setSelected(true);
 
-        ques1Panel.setBorder(border1);
+		judgingRadio.setSelected(true);
 
-        ques2Panel.setBorder(border2);
+		// Adds radio buttons to their panels
 
-        ques3Panel.setBorder(border3);
+		ques1Panel.add(extravertRadio);
 
-        ques4Panel.setBorder(border4);
+		ques1Panel.add(introvertRadio);
 
-         
+		ques2Panel.add(sensorRadio);
 
-        // Makes are only one radio button can be selected
+		ques2Panel.add(intuitiveRadio);
 
-         
+		ques3Panel.add(feelerRadio);
 
-        ButtonGroup group1 = new ButtonGroup();
+		ques3Panel.add(thinkerRadio);
 
-        ButtonGroup group2 = new ButtonGroup();
+		ques4Panel.add(judgingRadio);
 
-        ButtonGroup group3 = new ButtonGroup();
+		ques4Panel.add(perceivingRadio);
 
-        ButtonGroup group4 = new ButtonGroup();
+		// Assigns radio buttons to be in groups together
 
-         
+		group1.add(extravertRadio);
 
-        // Creates and sets text for radio buttons
+		group1.add(introvertRadio);
 
-         
+		group2.add(sensorRadio);
 
-        extravertRadio = new JRadioButton("In groups");
+		group2.add(intuitiveRadio);
 
-        introvertRadio = new JRadioButton("On your own");
+		group3.add(feelerRadio);
 
-        sensorRadio = new JRadioButton("The specifics");
+		group3.add(thinkerRadio);
 
-        intuitiveRadio = new JRadioButton("The big picture");
+		group4.add(judgingRadio);
 
-        feelerRadio = new JRadioButton("What feels right");
+		group4.add(perceivingRadio);
 
-        thinkerRadio = new JRadioButton("List of facts");
+		// Adds the radio button panels to the main panel
 
-        judgingRadio = new JRadioButton("To plan");
+		thePanel.add(ques1Panel);
 
-        perceivingRadio = new JRadioButton("To adapt");
+		thePanel.add(ques2Panel);
 
-         
+		thePanel.add(ques3Panel);
 
-        // Sets some radio buttons to true by default
+		thePanel.add(ques4Panel);
 
-         
+		// Creates a button
 
-        extravertRadio.setSelected(true);
+		getResultBut = new JButton("Get Result");
 
-        sensorRadio.setSelected(true);
+		// Creates an object that will monitor button clicks
 
-        feelerRadio.setSelected(true);
+		GetResultsListener butListener = new GetResultsListener();
 
-        judgingRadio.setSelected(true);
+		// Assigns an object that will monitor this buttons clicks
 
-         
+		// When clicked a method will execute
 
-        // Adds radio buttons to their panels
+		getResultBut.addActionListener(butListener);
 
-         
+		// Add the button & panel to the frame and show the frame
 
-        ques1Panel.add(extravertRadio);
+		thePanel.add(getResultBut);
 
-        ques1Panel.add(introvertRadio);
+		this.add(thePanel);
 
-        ques2Panel.add(sensorRadio);
+		this.setVisible(true);
 
-        ques2Panel.add(intuitiveRadio);
+	}
 
-        ques3Panel.add(feelerRadio);
+	class GetResultsListener implements ActionListener {
 
-        ques3Panel.add(thinkerRadio);
+		// Called when the button is clicked
 
-        ques4Panel.add(judgingRadio);
+		public void actionPerformed(ActionEvent e) {
 
-        ques4Panel.add(perceivingRadio);
+			// Define strings that will make the html that the
 
-         
+			// JEditorPane will display
 
-        // Assigns radio buttons to be in groups together
+			String pageToOpen = "",
 
-         
+					directoryLoc = "file:///Users/derekbanas/Documents/workspace3/Java Code/src/";
 
-        group1.add(extravertRadio);
+			String textToDisplay = "<html><div><img src=\"" + directoryLoc;
 
-        group1.add(introvertRadio);
+			// Check if the result button was clicked
 
-        group2.add(sensorRadio);
+			if (e.getSource() == getResultBut) {
 
-        group2.add(intuitiveRadio);
+				// Add to the string based on selected radio button
 
-        group3.add(feelerRadio);
+				if (extravertRadio.isSelected())
+					pageToOpen += "E";
 
-        group3.add(thinkerRadio);
+				if (introvertRadio.isSelected())
+					pageToOpen += "I";
 
-        group4.add(judgingRadio);
+				if (sensorRadio.isSelected())
+					pageToOpen += "S";
 
-        group4.add(perceivingRadio);
+				if (intuitiveRadio.isSelected())
+					pageToOpen += "N";
 
-         
+				if (feelerRadio.isSelected())
+					pageToOpen += "F";
 
-        // Adds the radio button panels to the main panel
+				if (thinkerRadio.isSelected())
+					pageToOpen += "T";
 
-         
+				if (judgingRadio.isSelected())
+					pageToOpen += "J";
 
-        thePanel.add(ques1Panel);
+				if (perceivingRadio.isSelected())
+					pageToOpen += "P";
 
-        thePanel.add(ques2Panel);
+				// Remove panels to make way for a report
 
-        thePanel.add(ques3Panel);
+				thePanel.remove(ques1Panel);
 
-        thePanel.add(ques4Panel);
+				thePanel.remove(ques2Panel);
 
-         
+				thePanel.remove(ques3Panel);
 
-        // Creates a button
+				thePanel.remove(ques4Panel);
 
-         
+				// Finish the html file that JEditorPane will display
 
-        getResultBut = new JButton("Get Result");
+				textToDisplay += pageToOpen + ".png" + "\" /></html>";
 
-         
+				// Define what JEditorPane will display
 
-        // Creates an object that will monitor button clicks
+				yourReport = new JEditorPane("text/html", textToDisplay);
 
-         
+				// Shut off editing and size the JEditorPane
 
-        GetResultsListener butListener = new GetResultsListener();
+				yourReport.setEditable(false);
 
-         
+				yourReport.setSize(650, 825);
 
-        // Assigns an object that will monitor this buttons clicks
+				// Add the JEditorPane to a scroller and define how
 
-        // When clicked a method will execute
+				// to handle scrollbars
 
-         
+				JScrollPane scroller = new JScrollPane(yourReport,
 
-        getResultBut.addActionListener(butListener);
+						JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 
-         
+						JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        // Add the button & panel to the frame and show the frame
+				// Size the scroll pane
 
-         
+				scroller.setPreferredSize(new Dimension(650, 825));
 
-        thePanel.add(getResultBut);
+				// Add Scroll pane and JEditorPane to the frame
 
-         
+				thePanel.add(scroller);
 
-        this.add(thePanel);
+				getResultBut.setVisible(false);
 
-         
+				// Redraw the frame after the changes are made
 
-        this.setVisible(true);
+				thePanel.revalidate();
 
-         
+				thePanel.repaint();
 
-         
+			}
 
-         
+		}
 
-    }
-
-     
-
-    class GetResultsListener implements ActionListener{
-
- 
-
-        // Called when the button is clicked
-
-         
-
-        public void actionPerformed(ActionEvent e) {
-
-             
-
-            // Define strings that will make the html that the
-
-            // JEditorPane will display
-
-             
-
-            String pageToOpen = "",
-
-                    directoryLoc = "file:///Users/derekbanas/Documents/workspace3/Java Code/src/";
-
-             
-
-            String textToDisplay ="<html><div><img src=\"" + directoryLoc;
-
-             
-
-            // Check if the result button was clicked
-
-             
-
-            if (e.getSource() == getResultBut){
-
-                 
-
-                // Add to the string based on selected radio button
-
-                 
-
-                if (extravertRadio.isSelected()) pageToOpen += "E";
-
-                if (introvertRadio.isSelected()) pageToOpen += "I";
-
-                 
-
-                if (sensorRadio.isSelected()) pageToOpen += "S";
-
-                if (intuitiveRadio.isSelected()) pageToOpen += "N";
-
-                 
-
-                if (feelerRadio.isSelected()) pageToOpen += "F";
-
-                if (thinkerRadio.isSelected()) pageToOpen += "T";
-
-                 
-
-                if (judgingRadio.isSelected()) pageToOpen += "J";
-
-                if (perceivingRadio.isSelected()) pageToOpen += "P";
-
-                 
-
-                // Remove panels to make way for a report
-
-                 
-
-                thePanel.remove(ques1Panel);
-
-                thePanel.remove(ques2Panel);
-
-                thePanel.remove(ques3Panel);
-
-                thePanel.remove(ques4Panel);
-
-                 
-
-                // Finish the html file that JEditorPane will display
-
-                     
-
-                textToDisplay += pageToOpen + ".png" + "\" /></html>";
-
-                     
-
-                // Define what JEditorPane will display
-
-                     
-
-                yourReport = new JEditorPane("text/html", textToDisplay);
-
-                     
-
-                // Shut off editing and size the JEditorPane
-
-                 
-
-                yourReport.setEditable(false);
-
-                 
-
-                yourReport.setSize(650, 825);
-
-                 
-
-                // Add the JEditorPane to a scroller and define how
-
-                // to handle scrollbars
-
-                 
-
-                JScrollPane scroller = new JScrollPane(yourReport,
-
-                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-
-                        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-                 
-
-                // Size the scroll pane
-
-                 
-
-                scroller.setPreferredSize(new Dimension(650, 825));
-
-                 
-
-                // Add Scroll pane and JEditorPane to the frame
-
-                 
-
-                thePanel.add(scroller);
-
-                 
-
-                getResultBut.setVisible(false);
-
-                 
-
-                // Redraw the frame after the changes are made
-
-                 
-
-                thePanel.revalidate();
-
-                thePanel.repaint();
-
-                 
-
-                 
-
-            }
-
-             
-
-        }
-
-         
-
-    }
-
-     
+	}
 
 }
 /*
-
-
-
-<html>
-
-<head>
-
-<title>Personality Test</title>
-
-</head>
-
-<body>
-
-<APPLET code="JavaLesson40.class" width="675" height="870">
-
-Sorry you can't run Java
-
-</APPLET>
-
-</body>
-
-</html>
-*/
+ * 
+ * 
+ * 
+ * <html>
+ * 
+ * <head>
+ * 
+ * <title>Personality Test</title>
+ * 
+ * </head>
+ * 
+ * <body>
+ * 
+ * <APPLET code="JavaLesson40.class" width="675" height="870">
+ * 
+ * Sorry you can't run Java
+ * 
+ * </APPLET>
+ * 
+ * </body>
+ * 
+ * </html>
+ */
