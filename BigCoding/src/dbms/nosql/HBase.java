@@ -31,11 +31,11 @@ public class HBase {
 	@SuppressWarnings("unused")
 	private static void retrieveRecords() throws IOException {
 		Configuration conf = HBaseConfiguration.create();									//uses hbase-site.xml picked from hadoop fs- gives properties
-		conf.set("hbase.master", "192.168.237.135:60000");
+		//conf.set("hbase.master", "192.168.237.135:60000");
 		conf.set("hbase.zookeeper.property.clientPort", "2181");
 		conf.set("hbase.zookeeper.quorum", "192.168.237.135");
 		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
-		conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
+		//conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
 		//reading
 		Connection connection = ConnectionFactory.createConnection(conf);
 		TableName tableName = TableName.valueOf("TLG_Wide2");
@@ -74,11 +74,11 @@ public class HBase {
 
 	private static void insertRecords() throws IOException {
 		Configuration conf = HBaseConfiguration.create();
-		conf.set("hbase.master", "192.168.237.135:60000");
+		//conf.set("hbase.master", "192.168.237.135:60000");
 		conf.set("hbase.zookeeper.property.clientPort", "2181");
 		conf.set("hbase.zookeeper.quorum", "192.168.237.135");
 		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
-		conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
+		//conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
 		
 		Connection connection = ConnectionFactory.createConnection(conf);
 		TableName tableName = TableName.valueOf("TLG_Wide2");
@@ -109,11 +109,11 @@ public class HBase {
 		int i = 0;
 		System.out.println("Test" + i++);
 		Configuration conf = HBaseConfiguration.create();
-		conf.set("hbase.master", "192.168.237.135:60000");
+		//conf.set("hbase.master", "192.168.237.135:60000");
 		conf.set("hbase.zookeeper.property.clientPort", "2181");
 		conf.set("hbase.zookeeper.quorum", "192.168.237.135");
 		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
-		conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
+		//conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
 		System.out.println("Test" + i++);
 		Connection connection = ConnectionFactory.createConnection(conf);
 		Admin admin = connection.getAdmin();
