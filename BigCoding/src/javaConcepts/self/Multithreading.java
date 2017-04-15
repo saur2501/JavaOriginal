@@ -10,13 +10,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-class MyThread implements Runnable {
+class ThreadExecutionForPool implements Runnable {
 
 	private String myName;
 	private int count;
 	private final long timeSleep;
 
-	MyThread(String name, int newcount, long newtimeSleep) {
+	ThreadExecutionForPool(String name, int newcount, long newtimeSleep) {
 		this.myName = name;
 		this.count = newcount;
 		this.timeSleep = newtimeSleep;
@@ -24,8 +24,6 @@ class MyThread implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-
 		int sum = 0;
 		for (int i = 1; i <= this.count; i++) {
 			sum = sum + i;
@@ -33,37 +31,125 @@ class MyThread implements Runnable {
 		try {
 			Thread.sleep(this.timeSleep);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(myName + " thread has sum = " + sum + " and is going to sleep for " + timeSleep);
-
 	}
-
 }
 
+class OtherClass {
+	private String message;
+
+	public OtherClass(String input) {
+		message = "Why, " + input + " Isn't this something?";
+	}
+
+	public String toString() {
+		return message;
+	}
+
+	public String synch() {
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+		}
+		return "Tweet";
+	}
+
+	public int updateVariable(int number) {
+		System.out.println("Gosd");
+		for(int i = 0; i < 1000; i++) {
+			number++;
+			System.out.println(number + "gotcha1");
+		}
+		System.out.println(number + "gotcha");
+		return number;
+	}
+}
+
+@SuppressWarnings("rawtypes")
 public class Multithreading {
 
-	private static Future taskTwo = null;
-	private static Future taskThree = null;
+	public static void main(String[] args) throws Exception {
+		// Thread pooling
+		System.out.println("1. Running thru runnable");
+		runThreadPool();
+		System.out.println("2. Starting Callable Example code");
+		int sum = callThreadPool();
+		System.out.println("Sum is " + sum);
+		System.out.println("3. Run method invocation");
+		runInvocation();
+		System.out.println("4. Thread safety");
+		threadSafetyCheck();
+		//System.exit(sum);
+	}
 
-	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		System.out.println("1. Invoking call method");
-		ExecutorService executor = Executors.newFixedThreadPool(2);
+	private static void threadSafetyCheck() {
+		//is OtherClass' updateVariable method Thread-safe?
+		Runnable runnableInline = new Runnable() {
+			public void run() {
+				OtherClass otherClass = new OtherClass("message");
+				System.out.println("INline");
+				System.out.println("Runnable Inline says: " + otherClass.updateVariable(5));
+			}
+		};
+		Runnable runnableAnonymous = new Runnable() {
+			public void run() {
+				OtherClass otherClass = new OtherClass("message");
+				System.out.println("Anony");
+				System.out.println("Runnable Anonymous says: " + otherClass.updateVariable(6));
+			}
+		};
+		System.out.println("toas");
+		new Thread(runnableInline).start();
+		System.out.println("Bisl");
+		new Thread(runnableAnonymous).start();
+	}
 
-		// execute the Runnable
-		Runnable taskOne = new MyThread("TaskOne", 2, 100);
-		executor.execute(taskOne); // executes run method
+	private static void runInvocation() {
+		ThreadExecutionRun t1 = new ThreadExecutionRun();
+		ThreadExecutionRun t2 = new ThreadExecutionRun();
+		ThreadExecutionRun t3 = new ThreadExecutionRun();
+		t1.start();
+		t2.start();
+		t3.start();
+	}
+
+	private static int callThreadPool() throws InterruptedException, ExecutionException {
+		ExecutorService executorService = Executors.newFixedThreadPool(3);
+		Set<Future<Integer>> set = new HashSet<Future<Integer>>();
+		String[] stringList = { "Krishna", "Gauranga", "Narsimha" };
+		for (String word : stringList) {
+			Callable<Integer> callable = new WordLengthCallable(word);
+			Future<Integer> future = executorService.submit(callable);
+			set.add(future);
+		}
+		executorService.shutdown();					//absolutely must with executor service for program to stop after done
+		//executorService.awaitTermination(1, TimeUnit.SECONDS);		//to pause the current thread to wait for all to finish
+		int sum = 0;
+		for (Future<Integer> future : set) {
+			sum += future.get(); // invokes call() method
+		}
+		System.out.printf("The sum of lengths is %s%n", sum);
+		return sum;
+	}
+
+	private static void runThreadPool() throws InterruptedException, ExecutionException {
+		Future taskTwo = null;
+		Future taskThree = null;
+		ExecutorService executorService = Executors.newFixedThreadPool(2);
+		Runnable taskOne = new ThreadExecutionForPool("TaskOne", 2, 100);
+		executorService.execute(taskOne); // executes run method
 		for (int i = 0; i < 2; i++) {
 			// if this task is not created or is canceled or is completed
 			if ((taskTwo == null) || (taskTwo.isDone()) || (taskTwo.isCancelled())) {
 				// submit a task and return a Future
-				taskTwo = executor.submit(new MyThread("TaskTwo", 4, 200));
+				taskTwo = executorService.submit(new ThreadExecutionForPool("TaskTwo", 4, 200));
 				System.out.println("Gods be good");
 			}
 
 			if ((taskThree == null) || (taskThree.isDone()) || (taskThree.isCancelled())) {
-				taskThree = executor.submit(new MyThread("TaskThree", 5, 100));
+				taskThree = executorService.submit(new ThreadExecutionForPool("TaskThree", 5, 100));
 			}
 			// if null the task has finished
 			if (taskTwo.get() == null) {
@@ -78,112 +164,46 @@ public class Multithreading {
 				taskThree.cancel(true);
 			}
 		}
-		executor.shutdown();
+		executorService.shutdown();
 		System.out.println("-----------------------");
-		// wait until all tasks are finished
-		executor.awaitTermination(1, TimeUnit.SECONDS);
+		executorService.awaitTermination(1, TimeUnit.SECONDS); 	// wait until all tasks are finished
 		System.out.println("All tasks are finished!");
-		System.out.println("2. Starting Callable Example code");
-		try {
-			CallableExample.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 }
 
-class CallableExample {
+class WordLengthCallable implements Callable<Integer> {
+	private String word;
 
-	public static class WordLengthCallable implements Callable {
-		private String word;
-
-		public WordLengthCallable(String word) {
-			this.word = word;
-		}
-
-		public Integer call() {
-			return Integer.valueOf(word.length());
-		}
+	public WordLengthCallable(String word) {
+		this.word = word;
 	}
 
-	public static void execute() throws Exception {
-		ExecutorService pool = Executors.newFixedThreadPool(3);
-		Set<Future<Integer>> set = new HashSet<Future<Integer>>();
-		String[] stringList = { "Krishna", "Gauranga", "Narsimha" };
-		for (String word : stringList) {
-			Callable<Integer> callable = new WordLengthCallable(word);
-			Future<Integer> future = pool.submit(callable);
-			set.add(future);
-		}
-		int sum = 0;
-		for (Future<Integer> future : set) {
-			sum += future.get();
-		}
-		System.out.printf("The sum of lengths is %s%n", sum);
-		System.out.println("Calling Hello World Code");
-		HelloWorld1.execute();
-		System.exit(sum);
+	public Integer call() {
+		return Integer.valueOf(word.length());
 	}
 }
 
-// one class needs to have a main() method
-class HelloWorld1 extends Thread {
-
+class ThreadExecutionRun extends Thread {
 	static Semaphore mutex = new Semaphore(1);
 
 	synchronized public void run() {
 		try {
+			System.out.println(Thread.currentThread().getName() + " is waiting");
 			mutex.acquire();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			OtherClass other = new OtherClass("Hi");
+			System.out.println(Thread.currentThread().getName());
+			other.synch();
+			Thread.sleep(500);
+			System.out.println(Thread.currentThread().getName());
+			System.out.println("thread is running...");
+			mutex.release();
+			System.out.println(Thread.currentThread().getName() + " is done");
+		} catch (InterruptedException ex) {
 		}
-		// OtherClass other = new OtherClass("Hi");
-		System.out.println(Thread.currentThread().getName());
-		// other.synch();
-		try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-		}
-		System.out.println(Thread.currentThread().getName());
-		// System.out.println("thread is running...");
-		mutex.release();
-	}
-
-	public static void execute() throws Exception {
-		HelloWorld1 t1 = new HelloWorld1();
-		HelloWorld1 t2 = new HelloWorld1();
-		HelloWorld1 t3 = new HelloWorld1();
-		HelloWorld1 t4 = new HelloWorld1();
-		HelloWorld1 t5 = new HelloWorld1();
-		t1.start();
-		t2.start();
-		t3.start();
-		t4.start();
-		t5.start();
 	}
 }
 
-// you can add other public classes to this editor in any order
-class OtherClass {
-	private String message;
-	private boolean answer = false;
-
-	public OtherClass(String input) {
-		message = "Why, " + input + " Isn't this something?";
-	}
-
-	public String toString() {
-		return message;
-	}
-
-	public String synch() {
-		try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-		}
-		return "Tweet";
-	}
-}
+// add Thread.sleep and do following- 
+// use ps -T aux to view all thread-id's spawned by processes.
+// use process explorer for windows

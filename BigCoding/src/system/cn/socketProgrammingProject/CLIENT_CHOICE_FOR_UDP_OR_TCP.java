@@ -1,4 +1,4 @@
-package system.cn.socketProgramming;
+package system.cn.socketProgrammingProject;
 //TODO- not explored
 import java.util.Scanner;
 
@@ -34,14 +34,14 @@ public class CLIENT_CHOICE_FOR_UDP_OR_TCP {
             System.out.println("Invoking TCP Client....");
             // TCPClient tcpclient = new TCPClient();
             System.out.println("Eastablishing connection with TCP Server....");
-            TCPClient.run();
+            TCPClientProject.run();
 
             //System.out.println("TCP Client Running....");
 
         } else if (choice == 2) {
             System.out.println("Invoking UDP Client....");
             //udpclient = new UDPClient();
-            UDPClient.run();
+            UDPClientProject.run();
 
         } else {
             System.out.println("Invalid Choice!");

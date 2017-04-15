@@ -3,7 +3,7 @@
  SAURABH DEVGUN - MT2015101
 */
 //TODO- not explored
-package system.cn.socketProgramming;
+package system.cn.socketProgrammingProject;
 
 /**
  *
@@ -17,7 +17,7 @@ public class RUN_UDP_SERVER {
                     System.out.println("UDP Server running....");
                     
                     while(true)
-                    {   UDPServer udpserver = null;
+                    {   UDPServerProject udpserver = null;
                         udpserver.run(); 
                     }
     }

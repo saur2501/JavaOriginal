@@ -1,4 +1,4 @@
-package system.cn.socketProgramming;
+package system.cn.socketProgrammingProject;
 //TODO- not explored
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

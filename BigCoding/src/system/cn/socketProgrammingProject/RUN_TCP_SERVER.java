@@ -2,7 +2,7 @@
  ABHINAV SHRIVASTAVA - MT2015003
  SAURABH DEVGUN - MT2015101
 */
-package system.cn.socketProgramming;
+package system.cn.socketProgrammingProject;
 //TODO- not explored
 public class RUN_TCP_SERVER {
       
@@ -12,7 +12,7 @@ public class RUN_TCP_SERVER {
                     System.out.println("TCP Server running....");
                    
                     while(true)
-                    {   TCPServer tcpserver = null;
+                    {   TCPServerProject tcpserver = null;
                         tcpserver.run(); 
                        
                     }
