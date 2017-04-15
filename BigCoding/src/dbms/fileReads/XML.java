@@ -91,6 +91,7 @@ class Lesson46 {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private static void writeXML(){
 	try{
 		

@@ -208,7 +208,7 @@ public class ParseXML{
 	
 	private static class tvShow{
 		
-		public String showName, showNetwork;
+		public String showName;
 		
 		public tvShow(String showName){
 			

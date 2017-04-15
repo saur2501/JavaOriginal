@@ -1,4 +1,5 @@
 package apps.swings;
+
 import java.awt.BorderLayout;
 
 import java.awt.event.ActionEvent;
@@ -7,25 +8,17 @@ import java.awt.event.ActionListener;
 
 import java.io.IOException;
 
- 
-
 // Thrown when a URL doesn't contain http://
 
 // and other rules like that
-
- 
 
 import java.net.MalformedURLException;
 
 import java.net.URL;
 
- 
-
 // A text component that allows for rich text
 
 // and basic html display
-
- 
 
 import javax.swing.JEditorPane;
 
@@ -39,522 +32,401 @@ import javax.swing.JScrollPane;
 
 import javax.swing.JTextField;
 
- 
-
 // Provides information on events triggered
 
 // through interaction with links
 
- 
-
 import javax.swing.event.HyperlinkEvent;
-
- 
 
 // Monitors user activity with links
 
- 
-
 import javax.swing.event.HyperlinkListener;
 
- 
+@SuppressWarnings("serial")
+public class Lesson39 extends JFrame implements HyperlinkListener, ActionListener {
 
-public class Lesson39 extends JFrame implements HyperlinkListener, ActionListener{
+	public static void main(String[] args) {
 
- 
+		new Lesson39("file:///Volumes/My%20Book/Presentations/HTML%20Tutorial/htmlexample.html");
 
-    public static void main(String[] args){
+	}
 
-         
+	String defaultURL;
 
-        new Lesson39("file:///Volumes/My%20Book/Presentations/HTML%20Tutorial/htmlexample.html");
+	JPanel toolPanel = new JPanel();
 
-         
+	JTextField theURL = new JTextField(25);
 
-    }
+	// Displays basic html pages
 
-     
+	// Doesn't understand JavaScript
 
-    String defaultURL;
+	JEditorPane htmlPage;
 
-     
+	public Lesson39(String defaultURL) {
 
-    JPanel toolPanel = new JPanel();
+		JFrame frame = new JFrame("Java Browser");
 
-    JTextField theURL = new JTextField(25);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-     
+		this.defaultURL = defaultURL;
 
-    // Displays basic html pages
+		// If the user interacts with the JTextField the
 
-    // Doesn't understand JavaScript
+		// actionPerformed method is called
 
-     
+		theURL.addActionListener(this);
 
-    JEditorPane htmlPage;
+		// Set default text in the JTextField
 
-     
+		theURL.setText(defaultURL);
 
-    public Lesson39(String defaultURL){
+		// Add the text field to a panel
 
-         
+		toolPanel.add(theURL);
 
-        JFrame frame = new JFrame("Java Browser");
+		// Add the panel to the northern quadrant of a frame
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(toolPanel, BorderLayout.NORTH);
 
-         
+		try {
 
-        this.defaultURL = defaultURL;
+			htmlPage = new JEditorPane(defaultURL);
 
-         
+			// If the user interacts with the JEditorPane
 
-        // If the user interacts with the JTextField the
+			// actions are triggered. Ex. Click on a link
 
-        // actionPerformed method is called
+			// change the JEditorPane page location
 
-         
+			htmlPage.addHyperlinkListener(this);
 
-        theURL.addActionListener(this);
+			// You can leave this true for rich text documents
 
-         
+			// but it will mess up web page display
 
-        // Set default text in the JTextField
+			htmlPage.setEditable(false);
 
-         
+			// Add the JEditorPane to a Scroll pane
 
-        theURL.setText(defaultURL);
+			JScrollPane scroller = new JScrollPane(htmlPage);
 
-         
+			// Add Scroll pane and JEditorPane to the frame
 
-        // Add the text field to a panel
+			frame.add(scroller, BorderLayout.CENTER);
 
-         
+		}
 
-        toolPanel.add(theURL);
+		// If something goes wrong with locating the html page
 
-         
+		// this will handle that error
 
-        // Add the panel to the northern quadrant of a frame
+		catch (IOException e) {
 
-         
+			e.printStackTrace();
 
-        frame.add(toolPanel, BorderLayout.NORTH);
+		}
 
-         
+		// Set size of the frame and display it
 
-        try {
+		frame.setSize(1200, 800);
 
-            htmlPage = new JEditorPane(defaultURL);
+		frame.setVisible(true);
 
-             
+	}
 
-            // If the user interacts with the JEditorPane
+	public void hyperlinkUpdate(HyperlinkEvent e) {
 
-            // actions are triggered. Ex. Click on a link
+		// Checks if a link was clicked
 
-            // change the JEditorPane page location
+		// EventType.ENTERED : Checks for hovering
 
-             
+		// EventType.EXITED : Checks for leaving link
 
-            htmlPage.addHyperlinkListener(this);
+		if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 
-             
+			try {
 
-            // You can leave this true for rich text documents
+				// Sets the URL to be displayed
 
-            // but it will mess up web page display
+				// getURL gets the URL for the link
 
-             
+				htmlPage.setPage(e.getURL());
 
-            htmlPage.setEditable(false);
+				// toExternalForm creates a String representation of the URL
 
-             
+				theURL.setText(e.getURL().toExternalForm());
 
-            // Add the JEditorPane to a Scroll pane
+			}
 
-             
+			catch (IOException e1) {
 
-            JScrollPane scroller = new JScrollPane(htmlPage);
+				e1.printStackTrace();
 
-             
+			}
 
-            // Add Scroll pane and JEditorPane to the frame
+		}
 
-             
+	}
 
-            frame.add(scroller, BorderLayout.CENTER);
+	public void actionPerformed(ActionEvent e) {
 
-             
+		String pageURL = "";
 
-        }
+		// Gets the Object that had an event triggered
 
-         
+		if (e.getSource() == theURL) {
 
-        // If something goes wrong with locating the html page
+			// Get the text in the JTextField
 
-        // this will handle that error
+			pageURL = theURL.getText();
 
-         
+		} else {
 
-        catch (IOException e) {
+			pageURL = defaultURL;
 
-            e.printStackTrace();
+			// Opens an alert box when an error is made
 
-        }
+			JOptionPane.showMessageDialog(Lesson39.this,
 
-         
+					"Please Enter a Web Address", "Error",
 
-        // Set size of the frame and display it
+					JOptionPane.ERROR_MESSAGE);
 
-         
+		}
 
-        frame.setSize(1200, 800);
+		try {
 
-        frame.setVisible(true);
+			// Sets the URL to be displayed
 
-         
+			htmlPage.setPage(new URL(pageURL));
 
-    }
+			theURL.setText(pageURL);
 
- 
+		}
 
-    public void hyperlinkUpdate(HyperlinkEvent e) {
+		catch (MalformedURLException e2) {
 
-         
+			JOptionPane.showMessageDialog(Lesson39.this,
 
-        // Checks if a link was clicked
+					"Please use http://", "Error",
 
-        // EventType.ENTERED : Checks for hovering
+					JOptionPane.ERROR_MESSAGE);
 
-        // EventType.EXITED : Checks for leaving link
+		}
 
-         
+		catch (IOException e1) {
 
-        if(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED){
+			e1.printStackTrace();
 
-             
+		}
 
-            try {
-
-                 
-
-                // Sets the URL to be displayed
-
-                // getURL gets the URL for the link
-
-                 
-
-                htmlPage.setPage(e.getURL());
-
-                 
-
-                // toExternalForm creates a String representation of the URL
-
-                 
-
-                theURL.setText(e.getURL().toExternalForm());
-
-                 
-
-            }
-
-             
-
-            catch(IOException e1){
-
-                e1.printStackTrace();
-
-            }
-
-             
-
-        }
-
-         
-
-    }
-
- 
-
-    public void actionPerformed(ActionEvent e) {
-
-         
-
-        String pageURL = "";
-
-         
-
-        // Gets the Object that had an event triggered
-
-         
-
-        if(e.getSource() == theURL){
-
-             
-
-            // Get the text in the JTextField
-
-             
-
-            pageURL = theURL.getText();
-
-             
-
-        } else {
-
-             
-
-            pageURL = defaultURL;
-
-             
-
-            // Opens an alert box when an error is made
-
-             
-
-            JOptionPane.showMessageDialog(Lesson39.this,
-
-                    "Please Enter a Web Address", "Error",
-
-                    JOptionPane.ERROR_MESSAGE);
-
-             
-
-        }
-
-         
-
-        try{
-
-             
-
-            // Sets the URL to be displayed
-
-             
-
-            htmlPage.setPage(new URL(pageURL));
-
-            theURL.setText(pageURL);
-
-             
-
-        }
-
-         
-
-        catch(MalformedURLException e2){
-
-            JOptionPane.showMessageDialog(Lesson39.this,
-
-                    "Please use http://", "Error",
-
-                    JOptionPane.ERROR_MESSAGE);
-
-        }
-
-         
-
-        catch(IOException e1){
-
-            e1.printStackTrace();
-
-        }
-
-         
-
-    }
-
-     
+	}
 
 }
 /*
-HTML Source
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-
-<meta name="generator" content="HTML Tidy for Linux (vers 6 November 2007), see www.w3.org" />
-
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
-
-<style type="text/css">
-
-<![CDATA[
-
- 
-
-h1 {color:red}
-
- 
-
-]]>
-
-</style>
-
-<meta name="description" content="Welcome" />
-
-<meta name="keywords" content="Flowers," />
-
-<meta name="author" content="Bob" />
-
-<title>Welcome to Bob's Hardware Store, we sell Flowers, Seeds, Rakes</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<style type="text/css">
-
-<![CDATA[
-
- span.c2 {text-decoration: line-through}
-
- div.c1 {text-align: center}
-
-]]>
-
-</style>
-
-</head>
-
-<body>
-
-<h1>Text to Draw Attention to</h1>
-
-<abbr title="A">Something Abbreviated</abbr> <acronym title="as">ASAP</acronym> <strong>I Want this to be Bold</strong> <big>This is going to be Big</big>
-
-<blockquote>Indent me and show I'm important</blockquote>
-
-<div class="c1">Center Me Please</div>
-
-<em>I like Being Italicized</em> <em>I like being Italicized too</em>
-
-<p>This is a big paragraph. Really, it is!</p>
-
-<q>You can quote me on that</q> <span class="c2">I've been struck</span> <small>I feel so small</small> <strong>I'm the strongest</strong> <sub>I'm Subscript</sub> <sup>I'm Superscript</sup> <br /><img src="file:///Volumes/My%20Book/Presentations/HTML%20Tutorial/Frame4.jpg" alt="Photo" height="150" width="200" />
-
-<dl>
-
-<dt>Bicycle</dt>
-
-<dd>- Has two Wheels</dd>
-
-<dt>Car</dt>
-
-<dd>- Has Four Wheels</dd>
-
-</dl>
-
-<ol>
-
-<li>Car</li>
-
-<li>Truck</li>
-
-<li>Bicycle</li>
-
-</ol>
-
-<ul>
-
-<li>Car</li>
-
-<li>Truck</li>
-
-<li>Bicycle</li>
-
-</ul>
-
-<a href="http://www.newthinktank.com" target="_blank">The New Think Tank Website</a> <a href="http://www.newthinktank.com#Great">Some Great Stuff</a> <a href="derekbanas@example.com?Subject=Hello%20again">Send Mail</a>
-
-<table summary="Here">
-
-<caption>Here are some things I did</caption>
-
-<tr>
-
-<th>Sat</th>
-
-<th>Sun</th>
-
-<th>Mon</th>
-
-</tr>
-
-<tr>
-
-<td>Played Ball</td>
-
-<td>Watched Football</td>
-
-<td>Worked</td>
-
-</tr>
-
-</table>
-
-<form action="mail2.php" method="post"><strong>Send Message to this Email</strong><br />
-
-<input type="text" name="email" size="40" /><br />
-
-<p><strong>Subject</strong><br />
-
-<input type="text" name="subject" size="40" /><br /></p>
-
-<p><strong>Text Area</strong><br />
-
-<textarea cols="40" rows="10" name="message">
-
-Default Text in Text Area Box
-
-</textarea>
-
-<br /></p>
-
-<p><strong>Text Input</strong><br />
-
-<input type="text" name="textinput" /><br /></p>
-
-<p><strong>Password Input</strong><br />
-
-<input type="password" name="password" /><br /></p>
-
-<p><strong>Radio Input</strong><br />
-
-<input type="radio" name="radioinput" value="Love Radio Buttons" />Love Radio Buttons <input type="radio" name="radioinput" value="Hate Radio Buttons" />Hate Radio Buttons<br /></p>
-
-<p><strong>Checkbox Input</strong><br />
-
-<input type="checkbox" name="checkboxinput" value="Love Checkboxs" />Love Checkboxs <input type="checkbox" name="checkboxinput" value="Hate Checkboxs" />Hate Checkboxs<br /></p>
-
-<p><strong>Select Input</strong><br />
-
-<select name="selectinput">
-
-<option value="loveselect">I love select buttons</option>
-
-<option value="hateselect">I hate select buttons</option>
-
-</select><br /></p>
-
-<p><strong>Option Input</strong><br />
-
-<select name="optioninput">
-
-<option value="loveselect">I love option buttons</option>
-
-<option value="hateselect">I hate option buttons</option>
-
-</select><br /></p>
-
-<p><input type="submit" value="Send" /> <input type="hidden" name="submitted" value="TRUE" /></p>
-
-</form>
-
-</body>
-
-</html>
-*/
+ * HTML Source
+ * 
+ * 
+ * <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ * "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ * 
+ * <html xmlns="http://www.w3.org/1999/xhtml">
+ * 
+ * <head>
+ * 
+ * <meta name="generator"
+ * content="HTML Tidy for Linux (vers 6 November 2007), see www.w3.org" />
+ * 
+ * <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
+ * 
+ * <style type="text/css">
+ * 
+ * <![CDATA[
+ * 
+ * 
+ * 
+ * h1 {color:red}
+ * 
+ * 
+ * 
+ * ]]>
+ * 
+ * </style>
+ * 
+ * <meta name="description" content="Welcome" />
+ * 
+ * <meta name="keywords" content="Flowers," />
+ * 
+ * <meta name="author" content="Bob" />
+ * 
+ * <title>Welcome to Bob's Hardware Store, we sell Flowers, Seeds, Rakes</title>
+ * 
+ * <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ * 
+ * <style type="text/css">
+ * 
+ * <![CDATA[
+ * 
+ * span.c2 {text-decoration: line-through}
+ * 
+ * div.c1 {text-align: center}
+ * 
+ * ]]>
+ * 
+ * </style>
+ * 
+ * </head>
+ * 
+ * <body>
+ * 
+ * <h1>Text to Draw Attention to</h1>
+ * 
+ * <abbr title="A">Something Abbreviated</abbr> <acronym
+ * title="as">ASAP</acronym> <strong>I Want this to be Bold</strong> <big>This
+ * is going to be Big</big>
+ * 
+ * <blockquote>Indent me and show I'm important</blockquote>
+ * 
+ * <div class="c1">Center Me Please</div>
+ * 
+ * <em>I like Being Italicized</em> <em>I like being Italicized too</em>
+ * 
+ * <p>This is a big paragraph. Really, it is!</p>
+ * 
+ * <q>You can quote me on that</q> <span class="c2">I've been struck</span>
+ * <small>I feel so small</small> <strong>I'm the strongest</strong> <sub>I'm
+ * Subscript</sub> <sup>I'm Superscript</sup> <br /><img
+ * src="file:///Volumes/My%20Book/Presentations/HTML%20Tutorial/Frame4.jpg"
+ * alt="Photo" height="150" width="200" />
+ * 
+ * <dl>
+ * 
+ * <dt>Bicycle</dt>
+ * 
+ * <dd>- Has two Wheels</dd>
+ * 
+ * <dt>Car</dt>
+ * 
+ * <dd>- Has Four Wheels</dd>
+ * 
+ * </dl>
+ * 
+ * <ol>
+ * 
+ * <li>Car</li>
+ * 
+ * <li>Truck</li>
+ * 
+ * <li>Bicycle</li>
+ * 
+ * </ol>
+ * 
+ * <ul>
+ * 
+ * <li>Car</li>
+ * 
+ * <li>Truck</li>
+ * 
+ * <li>Bicycle</li>
+ * 
+ * </ul>
+ * 
+ * <a href="http://www.newthinktank.com" target="_blank">The New Think Tank
+ * Website</a> <a href="http://www.newthinktank.com#Great">Some Great Stuff</a>
+ * <a href="derekbanas@example.com?Subject=Hello%20again">Send Mail</a>
+ * 
+ * <table summary="Here">
+ * 
+ * <caption>Here are some things I did</caption>
+ * 
+ * <tr>
+ * 
+ * <th>Sat</th>
+ * 
+ * <th>Sun</th>
+ * 
+ * <th>Mon</th>
+ * 
+ * </tr>
+ * 
+ * <tr>
+ * 
+ * <td>Played Ball</td>
+ * 
+ * <td>Watched Football</td>
+ * 
+ * <td>Worked</td>
+ * 
+ * </tr>
+ * 
+ * </table>
+ * 
+ * <form action="mail2.php" method="post"><strong>Send Message to this
+ * Email</strong><br />
+ * 
+ * <input type="text" name="email" size="40" /><br />
+ * 
+ * <p><strong>Subject</strong><br />
+ * 
+ * <input type="text" name="subject" size="40" /><br /></p>
+ * 
+ * <p><strong>Text Area</strong><br />
+ * 
+ * <textarea cols="40" rows="10" name="message">
+ * 
+ * Default Text in Text Area Box
+ * 
+ * </textarea>
+ * 
+ * <br /></p>
+ * 
+ * <p><strong>Text Input</strong><br />
+ * 
+ * <input type="text" name="textinput" /><br /></p>
+ * 
+ * <p><strong>Password Input</strong><br />
+ * 
+ * <input type="password" name="password" /><br /></p>
+ * 
+ * <p><strong>Radio Input</strong><br />
+ * 
+ * <input type="radio" name="radioinput" value="Love Radio Buttons" />Love Radio
+ * Buttons <input type="radio" name="radioinput" value="Hate Radio Buttons"
+ * />Hate Radio Buttons<br /></p>
+ * 
+ * <p><strong>Checkbox Input</strong><br />
+ * 
+ * <input type="checkbox" name="checkboxinput" value="Love Checkboxs" />Love
+ * Checkboxs <input type="checkbox" name="checkboxinput" value="Hate Checkboxs"
+ * />Hate Checkboxs<br /></p>
+ * 
+ * <p><strong>Select Input</strong><br />
+ * 
+ * <select name="selectinput">
+ * 
+ * <option value="loveselect">I love select buttons</option>
+ * 
+ * <option value="hateselect">I hate select buttons</option>
+ * 
+ * </select><br /></p>
+ * 
+ * <p><strong>Option Input</strong><br />
+ * 
+ * <select name="optioninput">
+ * 
+ * <option value="loveselect">I love option buttons</option>
+ * 
+ * <option value="hateselect">I hate option buttons</option>
+ * 
+ * </select><br /></p>
+ * 
+ * <p><input type="submit" value="Send" /> <input type="hidden" name="submitted"
+ * value="TRUE" /></p>
+ * 
+ * </form>
+ * 
+ * </body>
+ * 
+ * </html>
+ */

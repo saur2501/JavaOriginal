@@ -1,4 +1,4 @@
-package dbms.nosql;
+/*package dbms.nosql;
 //TODO- Not running- pom dependencies added but gives org.neo4j.helpers.Settings classNotFoundException
 //Ref- https://www.youtube.com/watch?v=-g-vCsZO_3g
 
@@ -38,3 +38,4 @@ public class Neo4JDB {
 		db.shutdown();
 	}
 }
+*/

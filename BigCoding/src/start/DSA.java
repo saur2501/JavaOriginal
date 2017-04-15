@@ -29,6 +29,6 @@ public class DSA {
 			System.out.print("\nDSA\n===\n1. ADT\t2. DS\t3. Algo\t-1. STOP\nEnter the Code : ");
 			code = sc.nextInt();
 		}
-		//sc.close();
+		sc.close();
 	}
 }

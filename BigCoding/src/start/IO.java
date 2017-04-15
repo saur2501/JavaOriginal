@@ -5,8 +5,6 @@ import java.util.Scanner;
 import dbms.DirectoriesRW;
 import dbms.fileReads.FileStreams;
 import dbms.fileReads.ParseXML;
-import dbms.fileReads.ReadWriteXML;
-import dbms.fileReads.XMLXPath;
 import dbms.rdbms.mysql;
 
 public class IO {
@@ -30,7 +28,7 @@ public class IO {
 				break;
 			case 3:
 				System.out.println("RDBMS Handling");
-				mysql rdb = new mysql();
+				@SuppressWarnings("unused") mysql rdb = new mysql();
 				//rdb.execute();
 				break;
 			case 4:

@@ -3,8 +3,6 @@ package dbms;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 public class DirectoriesRW {
 	public void createDir() {
 		String dirname = "C:\\dev\\try\\first";
@@ -96,7 +94,6 @@ public class DirectoriesRW {
 		double totalSpace = cdrive.getTotalSpace();
 		double availableSpace = cdrive.getFreeSpace();
 		double occupiedSpace = totalSpace - availableSpace;
-		String unit = null;
 		System.out.println("Space in C: Drive- "+totalSpace+" "+availableSpace+" "+occupiedSpace);
 	}
 	public void execute(){

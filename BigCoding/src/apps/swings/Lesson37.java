@@ -1,4 +1,5 @@
 package apps.swings;
+
 /*How to Load the Database
 
 You’ll need to do the following to read info from the database:
@@ -29,25 +30,15 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 
- 
-
 //The API for accessing and processing data stored in a database
-
- 
 
 import java.sql.*;
 
 import java.text.ParseException;
 
- 
-
 // Allows you to convert from string to date or vice versa
 
- 
-
 import java.text.SimpleDateFormat;
-
- 
 
 import javax.swing.JButton;
 
@@ -65,468 +56,294 @@ import javax.swing.JTextField;
 
 import javax.swing.table.DefaultTableModel;
 
- 
+public class Lesson37 extends JFrame {
 
-public class Lesson37 extends JFrame{
+	private static final long serialVersionUID = 1L;
 
-     
+	static JLabel lFirstName, lLastName, lState, lBirthDate;
 
-    static JLabel lFirstName, lLastName, lState, lBirthDate;
+	static JTextField tfFirstName, tfLastName, tfState, tfBirthDate;
 
-     
+	static java.util.Date dateBirthDate, sqlBirthDate;
 
-    static JTextField tfFirstName, tfLastName, tfState, tfBirthDate;
+	// Holds row values for the table
 
-     
+	static Object[][] databaseResults;
 
-    static java.util.Date dateBirthDate, sqlBirthDate;
+	// Holds column names for the table
 
-     
+	static Object[] columns = { "First Name", "Last Name", "State", "Birth Date" };
 
-    // Holds row values for the table
+	// DefaultTableModel defines the methods JTable will use
 
-     
+	// I'm overriding the getColumnClass
 
-    static Object[][] databaseResults;
+	@SuppressWarnings("serial")
+	static DefaultTableModel dTableModel = new DefaultTableModel(databaseResults, columns) {
 
-     
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		public Class getColumnClass(int column) {
 
-    // Holds column names for the table
+			Class returnValue;
 
-     
+			// Verifying that the column exists (index > 0 && index < number of
+			// columns
 
-    static Object[] columns = {"First Name", "Last Name", "State", "Birth Date"};
+			if ((column >= 0) && (column < getColumnCount())) {
 
-     
+				returnValue = getValueAt(0, column).getClass();
 
-    // DefaultTableModel defines the methods JTable will use
+			} else {
 
-    // I'm overriding the getColumnClass
+				// Returns the class for the item in the column
 
-     
+				returnValue = Object.class;
 
-    static DefaultTableModel dTableModel = new DefaultTableModel(databaseResults, columns){
+			}
 
-        public Class getColumnClass(int column) {
+			return returnValue;
 
-            Class returnValue;
+		}
 
-             
+	};
 
-            // Verifying that the column exists (index > 0 && index < number of columns
+	// Create a JTable using the custom DefaultTableModel
 
-             
+	static JTable table = new JTable(dTableModel);
 
-            if ((column >= 0) && (column < getColumnCount())) {
+	public static void main(String[] args) {
 
-              returnValue = getValueAt(0, column).getClass();
+		JFrame frame = new JFrame();
 
-            } else {
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                 
+		// A connection object is used to provide access to a database
 
-              // Returns the class for the item in the column  
+		Connection conn = null;
 
-                 
+		try {
 
-              returnValue = Object.class;
+			// The driver allows you to query the database with Java
 
-            }
+			// forName dynamically loads the class for you
 
-            return returnValue;
+			Class.forName("com.mysql.jdbc.Driver");
 
-          }
+			// DriverManager is used to handle a set of JDBC drivers
 
-        };
+			// getConnection establishes a connection to the database
 
-         
+			// You must also pass the userid and password for the database
 
-        // Create a JTable using the custom DefaultTableModel
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/samp_db", "mysqladm", "turtledove");
 
-         
+			// Statement objects executes a SQL query
 
-        static JTable table = new JTable(dTableModel);
+			// createStatement returns a Statement object
 
-     
+			Statement sqlState = conn.createStatement();
 
-    public static void main(String[] args){
+			// This is the query I'm sending to the database
 
-         
+			String selectStuff = "Select first_name, last_name, state, birth from president";
 
-        JFrame frame = new JFrame();
+			// A ResultSet contains a table of data representing the
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			// results of the query. It can not be changed and can
 
-         
+			// only be read in one direction
 
-        // A connection object is used to provide access to a database
+			ResultSet rows = sqlState.executeQuery(selectStuff);
 
-         
+			// Temporarily holds the row results
 
-        Connection conn = null;
+			Object[] tempRow;
 
-         
+			// next is used to iterate through the results of a query
 
-        try {
+			while (rows.next()) {
 
-            // The driver allows you to query the database with Java
+				tempRow = new Object[] { rows.getString(1), rows.getString(2), rows.getString(3), rows.getDate(4) };
 
-            // forName dynamically loads the class for you
+				/*
+				 * You can also get other types
+				 * 
+				 * int getInt()
+				 * 
+				 * boolean getBoolean()
+				 * 
+				 * double getDouble()
+				 * 
+				 * float getFloat()
+				 * 
+				 * long getLong()
+				 * 
+				 * short getShort()
+				 * 
+				 */
 
-            
+				dTableModel.addRow(tempRow);
 
-            Class.forName("com.mysql.jdbc.Driver");
+			}
 
-             
+		}
 
-            // DriverManager is used to handle a set of JDBC drivers
+		catch (SQLException ex) {
 
-            // getConnection establishes a connection to the database
+			// String describing the error
 
-            // You must also pass the userid and password for the database
+			System.out.println("SQLException: " + ex.getMessage());
 
-             
+			// Vendor specific error code
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/samp_db","mysqladm","turtledove");
+			System.out.println("VendorError: " + ex.getErrorCode());
 
-             
+		}
 
-            // Statement objects executes a SQL query
+		catch (ClassNotFoundException e) {
 
-            // createStatement returns a Statement object
+			// Executes if the driver can't be found
 
-             
+			e.printStackTrace();
 
-            Statement sqlState = conn.createStatement();
+		}
 
-             
+		// Increase the font size for the cells in the table
 
-            // This is the query I'm sending to the database
+		table.setFont(new Font("Serif", Font.PLAIN, 26));
 
-             
+		// Increase the size of the cells to allow for bigger fonts
 
-            String selectStuff = "Select first_name, last_name, state, birth from president";
+		table.setRowHeight(table.getRowHeight() + 16);
 
-             
+		// Allows the user to sort the data
 
-            // A ResultSet contains a table of data representing the
+		table.setAutoCreateRowSorter(true);
 
-            // results of the query. It can not be changed and can
+		// Adds the table to a scrollpane
 
-            // only be read in one direction
+		JScrollPane scrollPane = new JScrollPane(table);
 
-             
+		// Adds the scrollpane to the frame
 
-            ResultSet rows = sqlState.executeQuery(selectStuff);
+		frame.add(scrollPane, BorderLayout.CENTER);
 
-             
+		// Creates a button that when pressed executes the code
 
-            // Temporarily holds the row results
+		// in the method actionPerformed
 
-             
+		JButton addPres = new JButton("Add President");
 
-            Object[] tempRow;
+		addPres.addActionListener(new ActionListener() {
 
-             
+			public void actionPerformed(ActionEvent e) {
 
-            // next is used to iterate through the results of a query
+				String sFirstName = "", sLastName = "", sState = "", sDate = "";
 
-             
+				// getText returns the value in the text field
 
-            while(rows.next()){
+				sFirstName = tfFirstName.getText();
 
-                 
+				sLastName = tfLastName.getText();
 
-                tempRow = new Object[]{rows.getString(1), rows.getString(2), rows.getString(3), rows.getDate(4)};
+				sState = tfState.getText();
 
-                 
+				sDate = tfBirthDate.getText();
 
-                 
+				// Will convert from string to date
 
-                /* You can also get other types
+				SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
-                 * int getInt()
+				try {
 
-                 * boolean getBoolean()
+					dateBirthDate = dateFormatter.parse(sDate);
 
-                 * double getDouble()
+					sqlBirthDate = new java.sql.Date(dateBirthDate.getTime());
 
-                 * float getFloat()
+				} catch (ParseException e1) {
 
-                 * long getLong()
+					e1.printStackTrace();
 
-                 * short getShort()
+				}
 
-                 */
+				Object[] president = { sFirstName, sLastName, sState, sqlBirthDate };
 
-                 
+				dTableModel.addRow(president);
 
-                dTableModel.addRow(tempRow);
+			}
 
-            }
+		});
 
-        }
+		JButton removePres = new JButton("Remove President");
 
-         
+		removePres.addActionListener(new ActionListener() {
 
-        catch (SQLException ex) {
+			public void actionPerformed(ActionEvent e) {
 
-             
+				// Will remove which ever row that is selected
 
-            // String describing the error
+				dTableModel.removeRow(table.getSelectedRow());
 
-             
+			}
 
-            System.out.println("SQLException: " + ex.getMessage());
+		});
 
-             
+		// Define values for my labels
 
-            // Vendor specific error code
+		lFirstName = new JLabel("First Name");
 
-             
+		lLastName = new JLabel("Last Name");
 
-            System.out.println("VendorError: " + ex.getErrorCode());
+		lState = new JLabel("State");
 
-        }
+		lBirthDate = new JLabel("Birthday");
 
-         
+		// Define the size of text fields
 
-        catch (ClassNotFoundException e) {
+		tfFirstName = new JTextField(15);
 
-            // Executes if the driver can't be found
+		tfLastName = new JTextField(15);
 
-            e.printStackTrace();
+		tfState = new JTextField(2);
 
-        }
+		// Set default text and size for text field
 
-         
+		tfBirthDate = new JTextField("yyyy-MM-dd", 10);
 
-        // Increase the font size for the cells in the table
+		// Create a panel to hold editing buttons and fields
 
-         
+		JPanel inputPanel = new JPanel();
 
-        table.setFont(new Font("Serif", Font.PLAIN, 26));
+		// Put components in the panel
 
-         
+		inputPanel.add(lFirstName);
 
-        // Increase the size of the cells to allow for bigger fonts
+		inputPanel.add(tfFirstName);
 
-         
+		inputPanel.add(lLastName);
 
-        table.setRowHeight(table.getRowHeight()+16);
+		inputPanel.add(tfLastName);
 
-         
+		inputPanel.add(lState);
 
-        // Allows the user to sort the data
+		inputPanel.add(tfState);
 
-         
+		inputPanel.add(lBirthDate);
 
-        table.setAutoCreateRowSorter(true);
+		inputPanel.add(tfBirthDate);
 
-         
+		inputPanel.add(addPres);
 
-        // Adds the table to a scrollpane
+		inputPanel.add(removePres);
 
-         
+		// Add the component panel to the frame
 
-        JScrollPane scrollPane = new JScrollPane(table);
+		frame.add(inputPanel, BorderLayout.SOUTH);
 
-         
+		frame.setSize(1200, 500);
 
-        // Adds the scrollpane to the frame
+		frame.setVisible(true);
 
-         
-
-        frame.add(scrollPane, BorderLayout.CENTER);
-
-         
-
-        // Creates a button that when pressed executes the code
-
-        // in the method actionPerformed
-
-         
-
-        JButton addPres = new JButton("Add President");
-
-         
-
-        addPres.addActionListener(new ActionListener(){
-
-         
-
-            public void actionPerformed(ActionEvent e){
-
-                 
-
-                String sFirstName = "", sLastName = "", sState = "", sDate = "";
-
-                 
-
-                // getText returns the value in the text field
-
-                 
-
-                sFirstName = tfFirstName.getText();
-
-                sLastName = tfLastName.getText();
-
-                sState = tfState.getText();
-
-                sDate = tfBirthDate.getText();
-
-                 
-
-                // Will convert from string to date
-
-                 
-
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-
-                 
-
-                try {
-
-                    dateBirthDate = dateFormatter.parse(sDate);
-
-                    sqlBirthDate = new java.sql.Date(dateBirthDate.getTime());
-
-                } catch (ParseException e1) {
-
-                     
-
-                    e1.printStackTrace();
-
-                }
-
-                 
-
-                Object[] president = {sFirstName, sLastName, sState, sqlBirthDate};
-
-                dTableModel.addRow(president);
-
-                 
-
-            }
-
-             
-
-        });
-
-         
-
-        JButton removePres = new JButton("Remove President");
-
-         
-
-        removePres.addActionListener(new ActionListener(){
-
-             
-
-            public void actionPerformed(ActionEvent e){
-
-                 
-
-                // Will remove which ever row that is selected
-
-                 
-
-                dTableModel.removeRow(table.getSelectedRow());
-
-                 
-
-            }
-
-             
-
-        });
-
-         
-
-        // Define values for my labels
-
-         
-
-        lFirstName = new JLabel("First Name");
-
-        lLastName = new JLabel("Last Name");
-
-        lState = new JLabel("State");
-
-        lBirthDate = new JLabel("Birthday");
-
-         
-
-        // Define the size of text fields
-
-         
-
-        tfFirstName = new JTextField(15);
-
-        tfLastName = new JTextField(15);
-
-        tfState = new JTextField(2);
-
-         
-
-        // Set default text and size for text field
-
-         
-
-        tfBirthDate = new JTextField("yyyy-MM-dd", 10);
-
-         
-
-        // Create a panel to hold editing buttons and fields
-
-         
-
-        JPanel inputPanel = new JPanel();
-
-         
-
-        // Put components in the panel
-
-         
-
-        inputPanel.add(lFirstName);
-
-        inputPanel.add(tfFirstName);
-
-        inputPanel.add(lLastName);
-
-        inputPanel.add(tfLastName);
-
-        inputPanel.add(lState);
-
-        inputPanel.add(tfState);
-
-        inputPanel.add(lBirthDate);
-
-        inputPanel.add(tfBirthDate);
-
-        inputPanel.add(addPres);
-
-        inputPanel.add(removePres);
-
-         
-
-        // Add the component panel to the frame
-
-         
-
-        frame.add(inputPanel, BorderLayout.SOUTH);
-
-         
-
-        frame.setSize(1200, 500);
-
-        frame.setVisible(true);
-
-         
-
-    }
-
-     
+	}
 
 }

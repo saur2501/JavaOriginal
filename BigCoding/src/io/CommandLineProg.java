@@ -10,6 +10,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 public class CommandLineProg {
+	@SuppressWarnings("static-access")
 	public static void main(String[] parameters)
     {
         CommandLine commandLine;

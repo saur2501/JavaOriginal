@@ -1,726 +1,419 @@
 package apps.swings;
-import javax.swing.*;
 
- 
+import javax.swing.*;
 
 import java.awt.event.*;
 
- 
-
 // New event listener that monitors changing values for components
-
- 
 
 import javax.swing.event.ChangeEvent;
 
 import javax.swing.event.ChangeListener;
 
- 
-
 // Allows me to format the numbers
-
- 
 
 import java.text.NumberFormat;
 
- 
-
 // Allows me to edit borders on panels
-
- 
 
 import javax.swing.border.*;
 
- 
+@SuppressWarnings("serial")
+public class Lesson22 extends JFrame {
 
- 
+	JButton button1;
 
-public class Lesson22 extends JFrame{
+	JLabel label1, label2, label3;
 
-     
+	JTextField textField1, textField2;
 
-    JButton button1;
+	JCheckBox dollarSign, commaSeparator;
 
-    JLabel label1, label2, label3;
+	JRadioButton addNums, subtractNums, multNums, divideNums;
 
-    JTextField textField1, textField2;
+	JSlider howManyTimes;
 
-    JCheckBox dollarSign, commaSeparator;
+	double number1, number2, totalCalc;
 
-    JRadioButton addNums, subtractNums, multNums, divideNums;
+	public static void main(String[] args) {
 
-    JSlider howManyTimes;
+		new Lesson22();
 
-     
+	}
 
-    double number1, number2, totalCalc;
+	public Lesson22() {
 
-     
+		// Define the size of the frame
 
-    public static void main(String[] args){
+		this.setSize(400, 400);
 
-         
+		// Opens the frame in the middle of the screen
 
-        new Lesson22();
+		this.setLocationRelativeTo(null);
 
-         
+		// Define how the frame exits (Click the Close Button)
 
-    }
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-     
+		// Define the title for the frame
 
-    public Lesson22(){
+		this.setTitle("My Third Frame");
 
-         
+		// The JPanel contains all of the components for your frame
 
-        // Define the size of the frame
+		JPanel thePanel = new JPanel();
 
-         
+		// ---------------------------------------------------------
 
-        this.setSize(400, 400);
+		// Create a button with Click Here on it
 
-                 
+		button1 = new JButton("Calculate");
 
-        // Opens the frame in the middle of the screen
+		// Create an instance of ListenForEvents to handle events
 
-         
+		ListenForButton lForButton = new ListenForButton();
 
-        this.setLocationRelativeTo(null);
+		// Tell Java that you want to be alerted when an event
 
-         
+		// occurs on the button
 
-        // Define how the frame exits (Click the Close Button)
+		button1.addActionListener(lForButton);
 
-         
+		thePanel.add(button1);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// How to add a label --------------------------
 
-                 
+		label1 = new JLabel("Number 1");
 
-        // Define the title for the frame
+		thePanel.add(label1);
 
-                 
+		// How to add a text field ----------------------
 
-        this.setTitle("My Third Frame");
+		textField1 = new JTextField("", 5);
 
-                 
+		thePanel.add(textField1);
 
-        // The JPanel contains all of the components for your frame
+		// How to add a label --------------------------
 
-                 
+		label2 = new JLabel("Number 2");
 
-        JPanel thePanel = new JPanel();
+		thePanel.add(label2);
 
-         
+		// How to add a text field ----------------------
 
-        // ---------------------------------------------------------
+		textField2 = new JTextField("", 5);
 
-         
+		thePanel.add(textField2);
 
-        // Create a button with Click Here on it
+		// How to add checkboxes ------------------------
 
-         
+		dollarSign = new JCheckBox("Dollars");
 
-        button1 = new JButton("Calculate");
+		commaSeparator = new JCheckBox("Commas");
 
-                 
+		thePanel.add(dollarSign);
 
-        // Create an instance of ListenForEvents to handle events
+		// By putting true in here it is selected by default
 
-                 
+		thePanel.add(commaSeparator, true);
 
-        ListenForButton lForButton = new ListenForButton();
+		// Creates radio buttons with default labels
 
-                 
+		addNums = new JRadioButton("Add");
 
-        // Tell Java that you want to be alerted when an event
+		subtractNums = new JRadioButton("Subtract");
 
-        // occurs on the button
+		multNums = new JRadioButton("Multiply");
 
-                 
+		divideNums = new JRadioButton("Divide");
 
-        button1.addActionListener(lForButton);
+		// Creates a group that will contain radio buttons
 
-                 
+		// You do this so that when 1 is selected the others
 
-        thePanel.add(button1);
+		// are deselected
 
-         
+		ButtonGroup operation = new ButtonGroup();
 
-        // How to add a label --------------------------
+		// Add radio buttons to the group
 
-         
+		operation.add(addNums);
 
-        label1 = new JLabel("Number 1");
+		operation.add(subtractNums);
 
-         
+		operation.add(multNums);
 
-        thePanel.add(label1);
+		operation.add(divideNums);
 
-                 
+		// Create a new panel to hold radio buttons
 
-        // How to add a text field ----------------------
+		JPanel operPanel = new JPanel();
 
-                 
+		// Surround radio button panel with a border
 
-        textField1 = new JTextField("", 5);
+		// You can define different types of borders
 
-                         
+		// createEtchedBorder, createLineBorder, createTitledBorder
 
-        thePanel.add(textField1);
+		// createLoweredBevelBorder, createRaisedBevelBorder
 
-         
+		Border operBorder = BorderFactory.createTitledBorder("Operation");
 
-        // How to add a label --------------------------
+		// Set the border for the panel
 
-         
+		operPanel.setBorder(operBorder);
 
-        label2 = new JLabel("Number 2");
+		// Add the radio buttons to the panel
 
-                 
+		operPanel.add(addNums);
 
-        thePanel.add(label2);
+		operPanel.add(subtractNums);
 
-                         
+		operPanel.add(multNums);
 
-        // How to add a text field ----------------------
+		operPanel.add(divideNums);
 
-                         
+		// Selects the add radio button by default
 
-        textField2 = new JTextField("", 5);
+		addNums.setSelected(true);
 
-                                 
+		// Add the panel to the main panel
 
-        thePanel.add(textField2);
+		// You don't add the group
 
-         
+		thePanel.add(operPanel);
 
-        // How to add checkboxes ------------------------
+		// How to create a slider ----------------
 
-         
+		label3 = new JLabel("Perform How Many Times?");
 
-        dollarSign = new JCheckBox("Dollars");
+		thePanel.add(label3);
 
-        commaSeparator = new JCheckBox("Commas");
+		// Creates a slider with a min value of 0 thru 99
 
-         
+		// and an initial value of 1
 
-        thePanel.add(dollarSign);
+		howManyTimes = new JSlider(0, 99, 1);
 
-         
+		// Defines the minimum space between ticks
 
-        // By putting true in here it is selected by default
+		howManyTimes.setMinorTickSpacing(1);
 
-         
+		// Defines the minimum space between major ticks
 
-        thePanel.add(commaSeparator, true);
+		howManyTimes.setMajorTickSpacing(10);
 
- 
+		// Says to draw the ticks on the slider
 
-        // Creates radio buttons with default labels
+		howManyTimes.setPaintTicks(true);
 
-         
+		// Says to draw the tick labels on the slider
 
-        addNums = new JRadioButton("Add");
+		howManyTimes.setPaintLabels(true);
 
-        subtractNums = new JRadioButton("Subtract");
+		// Create an instance of ListenForEvents to handle events
 
-        multNums = new JRadioButton("Multiply");
+		ListenForSlider lForSlider = new ListenForSlider();
 
-        divideNums = new JRadioButton("Divide");
+		// Tell Java that you want to be alerted when an event
 
-         
+		// occurs on the slider
 
-        // Creates a group that will contain radio buttons
+		howManyTimes.addChangeListener(lForSlider);
 
-        // You do this so that when 1 is selected the others
+		thePanel.add(howManyTimes);
 
-        // are deselected
+		this.add(thePanel);
 
-         
+		this.setVisible(true);
 
-        ButtonGroup operation = new ButtonGroup();
+		// Gives focus to the textfield
 
-         
+		textField1.requestFocus();
 
-        // Add radio buttons to the group
+	}
 
-         
+	private class ListenForButton implements ActionListener {
 
-        operation.add(addNums);
+		// This method is called when an event occurs
 
-        operation.add(subtractNums);
+		public void actionPerformed(ActionEvent e) {
 
-        operation.add(multNums);
+			// Check if the source of the event was the button
 
-        operation.add(divideNums);
+			if (e.getSource() == button1) {
 
-         
+				// getText returns a String so you have to parse it
 
-        // Create a new panel to hold radio buttons
+				// into a double in this situation
 
-         
+				try {
 
-        JPanel operPanel = new JPanel();
+					number1 = Double.parseDouble(textField1.getText());
 
-         
+					number2 = Double.parseDouble(textField2.getText());
 
-        // Surround radio button panel with a border
+				}
 
-        // You can define different types of borders
+				catch (NumberFormatException excep) {
 
-        // createEtchedBorder, createLineBorder, createTitledBorder
+					// JOptionPane displays a popup on the screen
 
-        // createLoweredBevelBorder, createRaisedBevelBorder
+					// (parentComponent, message, title, error icon)
 
-         
+					// Error Icons: WARNING_MESSAGE, QUESTION_MESSAGE,
+					// PLAIN_MESSAGE
 
-        Border operBorder = BorderFactory.createTitledBorder("Operation");
+					JOptionPane.showMessageDialog(Lesson22.this, "Please Enter the Right Info", "Error",
+							JOptionPane.ERROR_MESSAGE);
 
-         
+					System.exit(0); // Closes the Java app
 
-        // Set the border for the panel
+				}
 
-         
+				if (addNums.isSelected()) {
+					totalCalc = addNumbers(number1, number2, howManyTimes.getValue());
 
-        operPanel.setBorder(operBorder);
+				} else if (subtractNums.isSelected()) {
+					totalCalc = subtractNumbers(number1, number2, howManyTimes.getValue());
 
-         
+				} else if (multNums.isSelected()) {
+					totalCalc = multiplyNumbers(number1, number2, howManyTimes.getValue());
 
-        // Add the radio buttons to the panel
+				} else {
+					totalCalc = divideNumbers(number1, number2, howManyTimes.getValue());
+				}
 
-         
+				// If the dollar is selected in the checkbox print the number as
+				// currency
 
-        operPanel.add(addNums);
+				if (dollarSign.isSelected()) {
 
-        operPanel.add(subtractNums);
+					// Defines that you want to format a number with $ and
+					// commas
 
-        operPanel.add(multNums);
+					NumberFormat numFormat = NumberFormat.getCurrencyInstance();
 
-        operPanel.add(divideNums);
+					JOptionPane.showMessageDialog(Lesson22.this, numFormat.format(totalCalc), "Solution",
+							JOptionPane.INFORMATION_MESSAGE);
 
-         
+				}
 
-        // Selects the add radio button by default
+				// If the comma is selected in the checkbox print the number
+				// with commas
 
-         
+				else if (commaSeparator.isSelected()) {
 
-        addNums.setSelected(true);
+					// Defines that you want to format a number with commas
 
-         
+					NumberFormat numFormat = NumberFormat.getNumberInstance();
 
-        // Add the panel to the main panel
+					JOptionPane.showMessageDialog(Lesson22.this, numFormat.format(totalCalc), "Solution",
+							JOptionPane.INFORMATION_MESSAGE);
 
-        // You don't add the group
+				} else {
 
-         
+					JOptionPane.showMessageDialog(Lesson22.this, totalCalc, "Solution",
+							JOptionPane.INFORMATION_MESSAGE);
 
-        thePanel.add(operPanel);
+				}
 
-         
+			}
 
-        // How to create a slider ----------------
+		}
 
-         
+	}
 
-        label3 = new JLabel("Perform How Many Times?");
+	// Implements ActionListener so it can react to events on components
 
-         
+	private class ListenForSlider implements ChangeListener {
 
-        thePanel.add(label3);
+		@Override
 
-         
+		public void stateChanged(ChangeEvent e) {
 
-        // Creates a slider with a min value of 0 thru 99
+			// Check if the source of the event was the button
 
-        // and an initial value of 1
+			if (e.getSource() == howManyTimes) {
 
-         
+				label3.setText("Perform How Many Times? " + howManyTimes.getValue());
 
-        howManyTimes = new JSlider(0, 99, 1);
+			}
 
-         
+		}
 
-        // Defines the minimum space between ticks
+	}
 
-         
+	public static double addNumbers(double number1, double number2, int howMany) {
 
-        howManyTimes.setMinorTickSpacing(1);
+		double total = 0;
 
-         
+		int i = 1;
 
-        // Defines the minimum space between major ticks
+		while (i <= howMany) {
 
-         
+			total = total + (number1 + number2);
 
-        howManyTimes.setMajorTickSpacing(10);
+			i++;
 
-         
+		}
 
-        // Says to draw the ticks on the slider
+		return total;
 
-         
+	}
 
-        howManyTimes.setPaintTicks(true);
+	public static double subtractNumbers(double number1, double number2, int howMany) {
 
-         
+		double total = 0;
 
-        // Says to draw the tick labels on the slider
+		int i = 1;
 
-         
+		while (i <= howMany) {
 
-        howManyTimes.setPaintLabels(true);
+			total = total + (number1 - number2);
 
-         
+			i++;
 
-        // Create an instance of ListenForEvents to handle events
+		}
 
-         
+		return total;
 
-        ListenForSlider lForSlider = new ListenForSlider();
+	}
 
-                 
+	public static double multiplyNumbers(double number1, double number2, int howMany) {
 
-        // Tell Java that you want to be alerted when an event
+		double total = 0;
 
-        // occurs on the slider
+		int i = 1;
 
-                 
+		while (i <= howMany) {
 
-        howManyTimes.addChangeListener(lForSlider);
+			total = total + (number1 * number2);
 
-         
+			i++;
 
-         
+		}
 
-        thePanel.add(howManyTimes);
+		return total;
 
-         
+	}
 
-        this.add(thePanel);
+	public static double divideNumbers(double number1, double number2, int howMany) {
 
-         
+		double total = 0;
 
-        this.setVisible(true);
+		int i = 1;
 
-         
+		while (i <= howMany) {
 
-        // Gives focus to the textfield
+			total = total + (number1 / number2);
 
-         
+			i++;
 
-        textField1.requestFocus();
+		}
 
-         
+		return total;
 
-    }
-
-     
-
-    private class ListenForButton implements ActionListener{
-
-         
-
-        // This method is called when an event occurs
-
-         
-
-        public void actionPerformed(ActionEvent e){
-
-             
-
-            // Check if the source of the event was the button
-
-             
-
-            if(e.getSource() == button1){
-
-                 
-
-                // getText returns a String so you have to parse it
-
-                // into a double in this situation
-
-                 
-
-                try{
-
-                    number1 = Double.parseDouble(textField1.getText());
-
-                    number2 = Double.parseDouble(textField2.getText());
-
-                }
-
-                 
-
-                catch(NumberFormatException excep){
-
-                     
-
-                    // JOptionPane displays a popup on the screen
-
-                    // (parentComponent, message, title, error icon)
-
-                    // Error Icons: WARNING_MESSAGE, QUESTION_MESSAGE, PLAIN_MESSAGE
-
-                     
-
-                    JOptionPane.showMessageDialog(Lesson22.this, "Please Enter the Right Info", "Error", JOptionPane.ERROR_MESSAGE);
-
-                    System.exit(0); // Closes the Java app
-
-                }
-
-                 
-
-                 
-
-                if(addNums.isSelected()) { totalCalc = addNumbers(number1, number2, howManyTimes.getValue());
-
-                 
-
-                } else if(subtractNums.isSelected()) { totalCalc = subtractNumbers(number1, number2, howManyTimes.getValue());
-
- 
-
-                } else if(multNums.isSelected()) { totalCalc = multiplyNumbers(number1, number2, howManyTimes.getValue());
-
-                 
-
-                } else { totalCalc = divideNumbers(number1, number2, howManyTimes.getValue()); }
-
-                 
-
-                // If the dollar is selected in the checkbox print the number as currency
-
-                 
-
-                if(dollarSign.isSelected()) {
-
-                     
-
-                    // Defines that you want to format a number with $ and commas
-
-                     
-
-                    NumberFormat numFormat = NumberFormat.getCurrencyInstance();
-
-                     
-
-                    JOptionPane.showMessageDialog(Lesson22.this, numFormat.format(totalCalc), "Solution", JOptionPane.INFORMATION_MESSAGE);
-
-                     
-
-                }
-
-                 
-
-                // If the comma is selected in the checkbox print the number with commas
-
-                 
-
-                else if(commaSeparator.isSelected()) {
-
-                     
-
-                    // Defines that you want to format a number with commas
-
-                     
-
-                    NumberFormat numFormat = NumberFormat.getNumberInstance();
-
-                     
-
-                    JOptionPane.showMessageDialog(Lesson22.this, numFormat.format(totalCalc), "Solution", JOptionPane.INFORMATION_MESSAGE);
-
-                     
-
-                } else {
-
-                 
-
-                JOptionPane.showMessageDialog(Lesson22.this, totalCalc, "Solution", JOptionPane.INFORMATION_MESSAGE);
-
-                 
-
-                }
-
-                     
-
-            }
-
-             
-
-        }
-
-         
-
-    }
-
-     
-
-    // Implements ActionListener so it can react to events on components
-
-     
-
-        private class ListenForSlider implements ChangeListener{
-
- 
-
-            @Override
-
-            public void stateChanged(ChangeEvent e) {
-
-                 
-
-                // Check if the source of the event was the button
-
-                 
-
-                if(e.getSource() == howManyTimes){
-
-                     
-
-                    label3.setText("Perform How Many Times? " + howManyTimes.getValue() );
-
-                     
-
-                         
-
-                }
-
-                 
-
-            }
-
-         
-
-         
-
-         
-
-        }
-
-         
-
-        public static double addNumbers(double number1, double number2, int howMany){
-
-             
-
-            double total = 0;
-
-             
-
-            int i = 1;
-
-             
-
-            while(i <= howMany){
-
-                total = total + (number1 + number2);
-
-                i++;
-
-            }
-
-             
-
-            return total;
-
-             
-
-        }
-
-         
-
-        public static double subtractNumbers(double number1, double number2, int howMany){
-
-             
-
-            double total = 0;
-
-             
-
-            int i = 1;
-
-             
-
-            while(i <= howMany){
-
-                total = total + (number1 - number2);
-
-                i++;
-
-            }
-
-             
-
-            return total;
-
-             
-
-        }
-
-         
-
-        public static double multiplyNumbers(double number1, double number2, int howMany){
-
-             
-
-            double total = 0;
-
-             
-
-            int i = 1;
-
-             
-
-            while(i <= howMany){
-
-                total = total + (number1 * number2);
-
-                i++;
-
-            }
-
-             
-
-            return total;
-
-             
-
-        }
-
-         
-
-        public static double divideNumbers(double number1, double number2, int howMany){
-
-             
-
-            double total = 0;
-
-             
-
-            int i = 1;
-
-             
-
-            while(i <= howMany){
-
-                total = total + (number1 / number2);
-
-                i++;
-
-            }
-
-             
-
-            return total;
-
-             
-
-        }
-
-     
+	}
 
 }

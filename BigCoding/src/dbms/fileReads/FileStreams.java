@@ -171,6 +171,8 @@ public class FileStreams {
 	        }
 	        fin.close();
 	        bin.close();*/
+		    bin.close();
+		    fin.close();
 		}catch(Exception e){
 		    	e.printStackTrace();
 	    }
@@ -190,6 +192,7 @@ public class FileStreams {
 	        System.out.print(k+" ");
     	}*/
     	System.out.println("Wrote input.txt on console");
+    	dataOut.close();
 	}
 	//ObjectInputStream
 	public void fileStreamTest() {
@@ -235,6 +238,7 @@ public class FileStreams {
             System.out.println("line " + lineNumber + " :" + line);
         	lineNumber++;
         }
+        scnr.close();
     }    
 	public void printStreamTest() throws Exception{
 		System.out.println("Printstream for writing");
@@ -289,6 +293,8 @@ public class FileStreams {
 		//starting both threads  
 		t1.start();  
 		t2.start();  
+		//wait();
+		pout.close();
 	}
 	public void pushback(){
 		try {
@@ -300,6 +306,7 @@ public class FileStreams {
 			System.out.println(data);
 			input.unread(data);
 			System.out.println(data);
+			input.close();
 		} catch (IOException e) {}
 	}
 	public void execute() throws Exception{
@@ -372,5 +379,6 @@ public class FileStreams {
 			choice = sc.nextInt();
 		}
 		System.out.println("My working location- "+System.getProperty("user.dir")); 					//my working location
+		sc.close();
 	}
 }
