@@ -18,5 +18,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="config"/>
+	<classpathentry kind="lib" path="APIs/db4o-8.0.184.15484-all-java5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

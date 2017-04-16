@@ -174,6 +174,8 @@ CREATE TABLE `payment` (
   CONSTRAINT `fk_pm_oid` FOREIGN KEY (`oid`) REFERENCES `order` (`oid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+/* Improvement- not null CHECK (payment_type IN ('trial', 'expired', 'active', 'cancelled')), */
+
 /*Data for the table `payment` */
 
 insert  into `payment`(`pmid`,`payment_type`,`oid`) values (1,1,1),(2,2,2),(3,2,3);
