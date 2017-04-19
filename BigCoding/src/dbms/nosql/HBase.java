@@ -18,7 +18,10 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
 public class HBase {
@@ -26,62 +29,101 @@ public class HBase {
 		createTable();
 		insertRecords();
 		retrieveRecords();
+		scanningRowkeys();
+		totalEntriesCounter();
+	}
+
+	private static void totalEntriesCounter() throws IOException {
+		Configuration conf = HBaseConfiguration.create();
+		conf.set("hbase.zookeeper.quorum", "192.168.237.140");
+		
+		Scan scan = new Scan();
+		scan.addFamily(Bytes.toBytes("TagsWide"));
+		scan.setMaxResultSize(100);
+		scan.setFilter(new FirstKeyOnlyFilter());
+		scan.setCaching(75);
+		
+		Connection connection = ConnectionFactory.createConnection(conf);
+		TableName tableName = TableName.valueOf("TLG_Wide12");
+		Table table = connection.getTable(tableName);
+		
+		ResultScanner scanner = table.getScanner(scan);
+		int count = 0;
+		for (Result result : scanner) {
+			String rowkey = Bytes.toString(result.getRow());
+			
+			Get g = new Get(Bytes.toBytes(rowkey));
+	        g.addFamily(Bytes.toBytes("TagsWide"));
+	        Result result2 = table.get(g);
+	        count += result2.size();
+		}
+		System.out.println("Total Number of Entries = " + count);
+	}
+
+	private static void scanningRowkeys() throws IOException {
+		Configuration conf = HBaseConfiguration.create();
+		conf.set("hbase.zookeeper.quorum", "192.168.237.140");
+		
+		Scan scan = new Scan();
+		scan.addFamily(Bytes.toBytes("TagsWide"));
+		scan.setMaxResultSize(100);
+		scan.setFilter(new FirstKeyOnlyFilter());
+		scan.setCaching(75);
+		
+		Connection connection = ConnectionFactory.createConnection(conf);
+		TableName tableName = TableName.valueOf("TLG_Wide12");
+		Table table = connection.getTable(tableName);
+		
+		ResultScanner scanner = table.getScanner(scan);
+		for (Result result : scanner) {						//for limiting number of records- (Result result : scanner.next(100))
+			String rowkey = Bytes.toString(result.getRow());
+			System.out.println(rowkey + " is bombastic");
+		}
 	}
 
 	@SuppressWarnings("unused")
 	private static void retrieveRecords() throws IOException {
-		Configuration conf = HBaseConfiguration.create();									//uses hbase-site.xml picked from hadoop fs- gives properties
-		//conf.set("hbase.master", "192.168.237.135:60000");
-		conf.set("hbase.zookeeper.property.clientPort", "2181");
-		conf.set("hbase.zookeeper.quorum", "192.168.237.135");
-		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
-		//conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
+		Configuration conf = HBaseConfiguration.create();
+		conf.set("hbase.zookeeper.quorum", "192.168.237.140");
 		//reading
 		Connection connection = ConnectionFactory.createConnection(conf);
-		TableName tableName = TableName.valueOf("TLG_Wide2");
-		//Table table = connection.getTable(tableName);
-		//this.durability = Durability.valueOf(HBaseConnection11.getHbaseProperties().getHBaseDurability().toUpperCase());
+		TableName tableName = TableName.valueOf("TLG_Wide12");
 		String columnFamily = "TagsWide";
 		byte[] columnFamilyBytes = Bytes.toBytes(columnFamily);
-		Table currentTable = connection.getTable(tableName);
-		String key = "1";
-		Get g = new Get(Bytes.toBytes(key));
-		Set<String> fields = null;
-		/*fields = new HashSet<>();
-		fields.add("1");
-		fields.add("Cutes");*/
-		if (fields == null) {
+		Table table = connection.getTable(tableName);
+		String rowkey = "1";
+		Get g = new Get(Bytes.toBytes(rowkey));
+		Set<String> columnNameSet = null;
+		/*columnNameSet = new HashSet<>();
+		columnNameSet.add("Quote");*/
+		if (columnNameSet == null) {
 	        g.addFamily(columnFamilyBytes);
 		} else {
-	        for (String field : fields) {
+	        for (String field : columnNameSet) {
 	          g.addColumn(columnFamilyBytes, Bytes.toBytes(field));
 	        }
 		}
 		
-		Result r = currentTable.get(g);
-		if (r.isEmpty()) {
+		Result result = table.get(g);
+		if (result.isEmpty()) {
 	      System.out.println("No rows selected");
 	    }
 
-		HashMap<String, byte[]> result = new HashMap<> ();;
-	    while (r.advance()) {
-	      final Cell c = r.current();
-	      result.put(Bytes.toString(CellUtil.cloneQualifier(c)),
+		HashMap<String, byte[]> resultMap = new HashMap<> ();;
+	    while (result.advance()) {
+	      final Cell c = result.current();
+	      resultMap.put(Bytes.toString(CellUtil.cloneQualifier(c)),
 	          (CellUtil.cloneValue(c)));
 	    }
-	    System.out.println(result.keySet() + "-Keys\nValues-" + result.values().size());
+	    System.out.println(resultMap.keySet() + "-Keys\nValues-" + resultMap.values().size());
 	}
 
 	private static void insertRecords() throws IOException {
 		Configuration conf = HBaseConfiguration.create();
-		//conf.set("hbase.master", "192.168.237.135:60000");
-		conf.set("hbase.zookeeper.property.clientPort", "2181");
-		conf.set("hbase.zookeeper.quorum", "192.168.237.135");
-		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
-		//conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
+		conf.set("hbase.zookeeper.quorum", "192.168.237.140");
 		
 		Connection connection = ConnectionFactory.createConnection(conf);
-		TableName tableName = TableName.valueOf("TLG_Wide2");
+		TableName tableName = TableName.valueOf("TLG_Wide12");
 		//Table table = connection.getTable(tableName);
 		//this.durability = Durability.valueOf(HBaseConnection11.getHbaseProperties().getHBaseDurability().toUpperCase());
 		String columnFamily = "TagsWide";
@@ -89,8 +131,8 @@ public class HBase {
 		
 		//insert records individually
 		Table currentTable = connection.getTable(tableName);
-		String key = "1";
-		Put p = new Put(Bytes.toBytes(key));
+		String rowkey = "1";
+		Put p = new Put(Bytes.toBytes(rowkey));
 	    //p.setDurability(durability);
 		
 		HashMap<String, byte[]> values = new HashMap<> ();
@@ -106,25 +148,15 @@ public class HBase {
 	}
 
 	private static void createTable() throws IOException {
-		int i = 0;
-		System.out.println("Test" + i++);
 		Configuration conf = HBaseConfiguration.create();
-		//conf.set("hbase.master", "192.168.237.135:60000");
-		conf.set("hbase.zookeeper.property.clientPort", "2181");
-		conf.set("hbase.zookeeper.quorum", "192.168.237.135");
-		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
-		//conf.setBoolean("hbase.ipc.client.tcpnodelay", true);
-		System.out.println("Test" + i++);
+		conf.set("hbase.zookeeper.quorum", "192.168.237.140");
 		Connection connection = ConnectionFactory.createConnection(conf);
 		Admin admin = connection.getAdmin();
-		System.out.println("Test" + i++);
-		HTableDescriptor table = new HTableDescriptor(TableName.valueOf("TLG_Wide2"));
-		System.out.println("Test" + i++);
+		HTableDescriptor table = new HTableDescriptor(TableName.valueOf("TLG_Wide12"));
 		table.addFamily(new HColumnDescriptor("TagsWide"));
-		System.out.println("Test" + i++);
 
 		if (!admin.tableExists(table.getTableName())) {
-			System.out.print("Creating table. ");
+			System.out.print("Creating table.");
 			admin.createTable(table);
 			System.out.println(" Done.");
 		}
