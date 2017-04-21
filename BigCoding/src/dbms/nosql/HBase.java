@@ -24,6 +24,7 @@ import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
+//NoSQL- Column Based Store, CP of CAP- Consistency may be compromised
 public class HBase {
 	public static void main(String[] args) throws IOException {
 		createTable();
@@ -65,6 +66,8 @@ public class HBase {
 		conf.set("hbase.zookeeper.quorum", "192.168.237.140");
 		
 		Scan scan = new Scan();
+		scan.setMaxVersions(1);
+        scan.setTimeRange (0L, 1416083300000L);
 		scan.addFamily(Bytes.toBytes("TagsWide"));
 		scan.setMaxResultSize(100);
 		scan.setFilter(new FirstKeyOnlyFilter());

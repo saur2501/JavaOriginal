@@ -1,7 +1,7 @@
 package dbms.rdbms;
 import java.sql.*;
 
-//run SqlScripts/mysql/ scripts b4 invocation 
+//run SqlScripts/mysql/ scripts b4 invocation
 public class mysql{
    // JDBC driver name and database URL
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  

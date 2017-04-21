@@ -1,7 +1,7 @@
 /*package dbms.nosql;
 //TODO- Not running- pom dependencies added but gives org.neo4j.helpers.Settings classNotFoundException
 //Ref- https://www.youtube.com/watch?v=-g-vCsZO_3g
-
+//NoSQL- guarrantees CA of CAP.
 import java.io.File;
 
 import org.neo4j.graphdb.GraphDatabaseService;
