@@ -11,7 +11,7 @@ public class Hive {
 	public static void main(String[] args) throws Exception {
 		String engineType = "tez";
 		Class.forName("org.apache.hive.jdbc.HiveDriver");																										//org.apache.hive.jdbc.HiveDriver
-		con = DriverManager.getConnection("jdbc:hive2://192.168.237.132:10000","hdfs","");
+		con = DriverManager.getConnection("jdbc:hive2://192.168.237.140:10000","hdfs","");
 		stmt = con.createStatement();
 		stmt.execute("set hive.execution.engine=tez");
 		if(engineType.equals("mr")) {
@@ -22,6 +22,10 @@ public class Hive {
 		stmt.execute("use tpcds_text_2");
 		ResultSet rs = stmt.executeQuery("SELECT * FROM call_center LIMIT 10");
 		System.out.println(rs.toString());
+		int i = 0;
+		while(rs.next()) {
+			System.out.println(rs.getString(7) + i++);
+		}
 		con.close();		
 	}
 }

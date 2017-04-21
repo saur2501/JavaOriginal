@@ -24,7 +24,7 @@ import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
-//NoSQL- Column Based Store, CP of CAP- Consistency may be compromised
+//NoSQL- Column Based Store, CP of CAP- (May compromise A)
 public class HBase {
 	public static void main(String[] args) throws IOException {
 		createTable();

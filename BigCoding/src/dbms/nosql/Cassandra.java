@@ -1,5 +1,5 @@
 package dbms.nosql;
-//NoSQL- Column Based Store, AP of CAP- Consistency may be compromised
+//NoSQL- Column Based Store, AP of CAP (May compromise C)
 import java.util.Date;
 import java.util.UUID;
 
