@@ -3698,3 +3698,159 @@ DEBUG   2017-04-21 15:42:18,009 [main] org.apache.thrift.transport.TSaslTranspor
 DEBUG   2017-04-21 15:42:18,009 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
 DEBUG   2017-04-21 15:42:23,010 [main] org.apache.thrift.transport.TSaslTransport  - CLIENT: reading data length: 53
 DEBUG   2017-04-21 15:42:23,011 [main] org.apache.thrift.transport.TSaslTransport  - writing data length: 100
+INFO    2017-04-22 11:06:06,668 [main] org.mongodb.driver.cluster  - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+DEBUG   2017-04-22 11:06:06,880 [main] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]
+INFO    2017-04-22 11:06:06,913 [main] org.mongodb.driver.cluster  - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+DEBUG   2017-04-22 11:06:27,031 [cluster-ClusterId{value='58faebc692b45e15bc4f4435', description='null'}-localhost:27017] org.mongodb.driver.connection  - Closing connection connectionId{localValue:1}
+INFO    2017-04-22 11:06:27,034 [cluster-ClusterId{value='58faebc692b45e15bc4f4435', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Exception in monitor thread while connecting to server localhost:27017
+com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message
+	at com.mongodb.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:477)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:228)
+	at com.mongodb.connection.CommandHelper.receiveReply(CommandHelper.java:134)
+	at com.mongodb.connection.CommandHelper.receiveCommandResult(CommandHelper.java:121)
+	at com.mongodb.connection.CommandHelper.executeCommand(CommandHelper.java:32)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.initializeConnectionDescription(InternalStreamConnectionInitializer.java:85)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:45)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:116)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:113)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at com.mongodb.connection.SocketStream.read(SocketStream.java:85)
+	at com.mongodb.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:494)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:224)
+	... 8 more
+DEBUG   2017-04-22 11:06:27,042 [cluster-ClusterId{value='58faebc692b45e15bc4f4435', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message}, caused by {java.net.SocketTimeoutException: Read timed out}}]
+INFO    2017-04-22 11:07:54,449 [main] org.mongodb.driver.cluster  - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+DEBUG   2017-04-22 11:07:54,611 [main] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]
+INFO    2017-04-22 11:07:54,635 [main] org.mongodb.driver.cluster  - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+DEBUG   2017-04-22 11:08:14,662 [cluster-ClusterId{value='58faec3292b45e16f88fa77d', description='null'}-localhost:27017] org.mongodb.driver.connection  - Closing connection connectionId{localValue:1}
+INFO    2017-04-22 11:08:14,667 [cluster-ClusterId{value='58faec3292b45e16f88fa77d', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Exception in monitor thread while connecting to server localhost:27017
+com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message
+	at com.mongodb.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:477)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:228)
+	at com.mongodb.connection.CommandHelper.receiveReply(CommandHelper.java:134)
+	at com.mongodb.connection.CommandHelper.receiveCommandResult(CommandHelper.java:121)
+	at com.mongodb.connection.CommandHelper.executeCommand(CommandHelper.java:32)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.initializeConnectionDescription(InternalStreamConnectionInitializer.java:85)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:45)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:116)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:113)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at com.mongodb.connection.SocketStream.read(SocketStream.java:85)
+	at com.mongodb.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:494)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:224)
+	... 8 more
+DEBUG   2017-04-22 11:08:14,678 [cluster-ClusterId{value='58faec3292b45e16f88fa77d', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message}, caused by {java.net.SocketTimeoutException: Read timed out}}]
+INFO    2017-04-22 11:09:05,746 [main] org.mongodb.driver.cluster  - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+DEBUG   2017-04-22 11:09:05,933 [main] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]
+INFO    2017-04-22 11:09:06,056 [main] org.mongodb.driver.cluster  - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+DEBUG   2017-04-22 11:09:25,976 [cluster-ClusterId{value='58faec7992b45e138008ea0d', description='null'}-localhost:27017] org.mongodb.driver.connection  - Closing connection connectionId{localValue:1}
+INFO    2017-04-22 11:09:25,979 [cluster-ClusterId{value='58faec7992b45e138008ea0d', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Exception in monitor thread while connecting to server localhost:27017
+com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message
+	at com.mongodb.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:477)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:228)
+	at com.mongodb.connection.CommandHelper.receiveReply(CommandHelper.java:134)
+	at com.mongodb.connection.CommandHelper.receiveCommandResult(CommandHelper.java:121)
+	at com.mongodb.connection.CommandHelper.executeCommand(CommandHelper.java:32)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.initializeConnectionDescription(InternalStreamConnectionInitializer.java:85)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:45)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:116)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:113)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at com.mongodb.connection.SocketStream.read(SocketStream.java:85)
+	at com.mongodb.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:494)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:224)
+	... 8 more
+DEBUG   2017-04-22 11:09:25,987 [cluster-ClusterId{value='58faec7992b45e138008ea0d', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message}, caused by {java.net.SocketTimeoutException: Read timed out}}]
+INFO    2017-04-22 11:12:22,804 [main] org.mongodb.driver.cluster  - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+DEBUG   2017-04-22 11:12:22,994 [main] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]
+INFO    2017-04-22 11:12:23,068 [main] org.mongodb.driver.cluster  - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+INFO    2017-04-22 11:12:23,093 [cluster-ClusterId{value='58faed3e92b45e0e8807bdba', description='null'}-localhost:27017] org.mongodb.driver.connection  - Opened connection [connectionId{localValue:1, serverValue:3}] to localhost:27017
+DEBUG   2017-04-22 11:12:23,094 [cluster-ClusterId{value='58faed3e92b45e0e8807bdba', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Checking status of localhost:27017
+INFO    2017-04-22 11:12:23,098 [cluster-ClusterId{value='58faed3e92b45e0e8807bdba', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 2, 3]}, minWireVersion=0, maxWireVersion=4, maxDocumentSize=16777216, roundTripTimeNanos=1067808}
+DEBUG   2017-04-22 11:12:23,205 [cluster-ClusterId{value='58faed3e92b45e0e8807bdba', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Updating cluster description to  {type=STANDALONE, servers=[{address=localhost:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+INFO    2017-04-22 11:12:23,240 [main] org.mongodb.driver.connection  - Opened connection [connectionId{localValue:2, serverValue:4}] to localhost:27017
+DEBUG   2017-04-22 11:12:23,268 [main] org.mongodb.driver.protocol.insert  - Inserting 1 documents into namespace test.testedd on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,557 [main] org.mongodb.driver.protocol.insert  - Insert completed
+DEBUG   2017-04-22 11:12:23,566 [main] org.mongodb.driver.protocol.insert  - Inserting 100 documents into namespace test.testedd on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,581 [main] org.mongodb.driver.protocol.insert  - Insert completed
+DEBUG   2017-04-22 11:12:23,597 [main] org.mongodb.driver.protocol.command  - Sending command {count : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,600 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 11:12:23,614 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,618 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 11:12:23,628 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,632 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 11:12:23,670 [main] org.mongodb.driver.protocol.command  - Sending command {getMore : BsonInt64{value=23767932325}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,671 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 11:12:23,677 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,678 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 11:12:23,682 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,687 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 11:12:23,697 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,702 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 11:12:23,713 [main] org.mongodb.driver.protocol.update  - Updating documents in namespace test.testedd on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,718 [main] org.mongodb.driver.protocol.update  - Update completed
+DEBUG   2017-04-22 11:12:23,721 [main] org.mongodb.driver.protocol.update  - Updating documents in namespace test.testedd on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,737 [main] org.mongodb.driver.protocol.update  - Update completed
+DEBUG   2017-04-22 11:12:23,740 [main] org.mongodb.driver.protocol.delete  - Deleting documents from namespace test.testedd on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,742 [main] org.mongodb.driver.protocol.delete  - Delete completed
+DEBUG   2017-04-22 11:12:23,745 [main] org.mongodb.driver.protocol.delete  - Deleting documents from namespace test.testedd on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,747 [main] org.mongodb.driver.protocol.delete  - Delete completed
+DEBUG   2017-04-22 11:12:23,755 [main] org.mongodb.driver.protocol.command  - Sending command {createIndexes : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:4}] to server localhost:27017
+DEBUG   2017-04-22 11:12:23,833 [main] org.mongodb.driver.protocol.command  - Command execution completed
+INFO    2017-04-22 11:12:23,836 [main] org.mongodb.driver.connection  - Closed connection [connectionId{localValue:2, serverValue:4}] to localhost:27017 because the pool has been closed.
+DEBUG   2017-04-22 11:12:23,837 [main] org.mongodb.driver.connection  - Closing connection connectionId{localValue:2, serverValue:4}
+DEBUG   2017-04-22 11:12:23,839 [cluster-ClusterId{value='58faed3e92b45e0e8807bdba', description='null'}-localhost:27017] org.mongodb.driver.connection  - Closing connection connectionId{localValue:1, serverValue:3}
+INFO    2017-04-22 22:57:20,594 [main] org.mongodb.driver.cluster  - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+DEBUG   2017-04-22 22:57:21,395 [main] org.mongodb.driver.cluster  - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]
+INFO    2017-04-22 22:57:21,936 [main] org.mongodb.driver.cluster  - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+INFO    2017-04-22 22:57:22,377 [cluster-ClusterId{value='58fb9278fb2d620fd0238cbc', description='null'}-localhost:27017] org.mongodb.driver.connection  - Opened connection [connectionId{localValue:1, serverValue:5}] to localhost:27017
+DEBUG   2017-04-22 22:57:22,378 [cluster-ClusterId{value='58fb9278fb2d620fd0238cbc', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Checking status of localhost:27017
+INFO    2017-04-22 22:57:22,382 [cluster-ClusterId{value='58fb9278fb2d620fd0238cbc', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 2, 3]}, minWireVersion=0, maxWireVersion=4, maxDocumentSize=16777216, roundTripTimeNanos=741094}
+DEBUG   2017-04-22 22:57:22,392 [cluster-ClusterId{value='58fb9278fb2d620fd0238cbc', description='null'}-localhost:27017] org.mongodb.driver.cluster  - Updating cluster description to  {type=STANDALONE, servers=[{address=localhost:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+INFO    2017-04-22 22:57:22,442 [main] org.mongodb.driver.connection  - Opened connection [connectionId{localValue:2, serverValue:6}] to localhost:27017
+DEBUG   2017-04-22 22:57:22,658 [main] org.mongodb.driver.protocol.insert  - Inserting 1 documents into namespace test.testedd on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,321 [main] org.mongodb.driver.protocol.insert  - Insert completed
+DEBUG   2017-04-22 22:57:23,325 [main] org.mongodb.driver.protocol.insert  - Inserting 100 documents into namespace test.testedd on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,358 [main] org.mongodb.driver.protocol.insert  - Insert completed
+DEBUG   2017-04-22 22:57:23,450 [main] org.mongodb.driver.protocol.command  - Sending command {count : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,494 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 22:57:23,559 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,687 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 22:57:23,735 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,762 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 22:57:23,802 [main] org.mongodb.driver.protocol.command  - Sending command {getMore : BsonInt64{value=22740585459}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,874 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 22:57:23,887 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,924 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 22:57:23,942 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,946 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 22:57:23,956 [main] org.mongodb.driver.protocol.command  - Sending command {find : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:23,978 [main] org.mongodb.driver.protocol.command  - Command execution completed
+DEBUG   2017-04-22 22:57:24,009 [main] org.mongodb.driver.protocol.update  - Updating documents in namespace test.testedd on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:24,093 [main] org.mongodb.driver.protocol.update  - Update completed
+DEBUG   2017-04-22 22:57:24,097 [main] org.mongodb.driver.protocol.update  - Updating documents in namespace test.testedd on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:24,111 [main] org.mongodb.driver.protocol.update  - Update completed
+DEBUG   2017-04-22 22:57:24,161 [main] org.mongodb.driver.protocol.delete  - Deleting documents from namespace test.testedd on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:24,188 [main] org.mongodb.driver.protocol.delete  - Delete completed
+DEBUG   2017-04-22 22:57:24,203 [main] org.mongodb.driver.protocol.delete  - Deleting documents from namespace test.testedd on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:24,221 [main] org.mongodb.driver.protocol.delete  - Delete completed
+DEBUG   2017-04-22 22:57:24,250 [main] org.mongodb.driver.protocol.command  - Sending command {createIndexes : BsonString{value='testedd'}} to database test on connection [connectionId{localValue:2, serverValue:6}] to server localhost:27017
+DEBUG   2017-04-22 22:57:24,252 [main] org.mongodb.driver.protocol.command  - Command execution completed
+INFO    2017-04-22 22:57:24,254 [main] org.mongodb.driver.connection  - Closed connection [connectionId{localValue:2, serverValue:6}] to localhost:27017 because the pool has been closed.
+DEBUG   2017-04-22 22:57:24,254 [main] org.mongodb.driver.connection  - Closing connection connectionId{localValue:2, serverValue:6}
+DEBUG   2017-04-22 22:57:24,258 [cluster-ClusterId{value='58fb9278fb2d620fd0238cbc', description='null'}-localhost:27017] org.mongodb.driver.connection  - Closing connection connectionId{localValue:1, serverValue:5}
