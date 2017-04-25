@@ -67,7 +67,7 @@ public class HBase {
 		
 		Scan scan = new Scan();
 		scan.setMaxVersions(1);
-        scan.setTimeRange (0L, 1416083300000L);
+        scan.setTimeRange (0L, 1716083300000L);
 		scan.addFamily(Bytes.toBytes("TagsWide"));
 		scan.setMaxResultSize(100);
 		scan.setFilter(new FirstKeyOnlyFilter());
@@ -82,6 +82,7 @@ public class HBase {
 			String rowkey = Bytes.toString(result.getRow());
 			System.out.println(rowkey + " is bombastic");
 		}
+		System.out.println("Scanning rowkeys is done!");
 	}
 
 	@SuppressWarnings("unused")

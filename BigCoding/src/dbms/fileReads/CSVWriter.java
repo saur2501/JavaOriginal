@@ -9,15 +9,6 @@ import org.supercsv.io.CsvMapWriter;
 import org.supercsv.io.ICsvMapWriter;
 import org.supercsv.prefs.CsvPreference;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author IC071166
- */
 public class CSVWriter {
 
 	public static void saveInCSV(Map<String, LinkedHashMap<String, String>> allmetricsmap, String nameOfFile)
