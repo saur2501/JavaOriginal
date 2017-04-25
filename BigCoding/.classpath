@@ -19,5 +19,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="config"/>
 	<classpathentry kind="lib" path="APIs/db4o-8.0.184.15484-all-java5.jar"/>
+	<classpathentry kind="lib" path="APIs/super-csv-2.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
