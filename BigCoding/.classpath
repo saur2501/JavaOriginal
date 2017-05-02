@@ -20,5 +20,12 @@
 	<classpathentry kind="lib" path="config"/>
 	<classpathentry kind="lib" path="APIs/db4o-8.0.184.15484-all-java5.jar"/>
 	<classpathentry kind="lib" path="APIs/super-csv-2.0.1.jar"/>
+	<classpathentry kind="lib" path="APIs/HadoopStuff/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="APIs/HadoopStuff/hadoop-ant-0.20.2-cdh3u4.jar"/>
+	<classpathentry kind="lib" path="APIs/HadoopStuff/hadoop-core-0.20.2-cdh3u5.jar"/>
+	<classpathentry kind="lib" path="APIs/HadoopStuff/hadoop-examples-0.20.2-cdh3u5.jar"/>
+	<classpathentry kind="lib" path="APIs/HadoopStuff/hive-exec-0.13.1.jar"/>
+	<classpathentry kind="lib" path="APIs/HadoopStuff/pig-0.3.0-core.jar"/>
+	<classpathentry kind="lib" path="APIs/HadoopStuff/pig-0.8.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
