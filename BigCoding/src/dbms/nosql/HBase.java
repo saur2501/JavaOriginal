@@ -1,9 +1,15 @@
 package dbms.nosql;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
@@ -21,20 +27,86 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.filter.BinaryComparator;
+import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
+import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.FilterList;
 import org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter;
+import org.apache.hadoop.hbase.filter.QualifierFilter;
+import org.apache.hadoop.hbase.filter.RowFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
 //NoSQL- Column Based Store, CP of CAP- (May compromise A)
 public class HBase {
-	private static String hbaseIP = "132.186.179.201";
+	private static String hbaseIP = "192.168.50.143";
 	private static String tableNameString = "TLG_Wide12";
 	private static String columnFamilyNameString = "TagsWide";
 	public static void main(String[] args) throws IOException {
-		createTable();
+		//createTable();
 		insertRecords();
 		retrieveRecords();
 		scanningRowkeys();
 		totalEntriesCounter();
+		filterByColumnNames();
+	}
+	
+	public static void filterByColumnNames() throws IOException {
+		FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL);
+
+		String rowKey = "998117532+1495132200000";
+		long startEpochTime = 946668661000L;
+		long endEpochTime = 1514748661000L;
+		System.out.println("That's good====" + startEpochTime + " " + endEpochTime);
+
+		Filter startRow = new RowFilter(CompareOp.EQUAL, new BinaryComparator(Bytes.toBytes(rowKey)));
+		Filter endRange, startRange;
+		startRange = new QualifierFilter(CompareOp.GREATER_OR_EQUAL,
+				new BinaryComparator(Bytes.toBytes((startEpochTime))));
+		endRange = new QualifierFilter(CompareOp.LESS_OR_EQUAL,
+				new BinaryComparator(Bytes.toBytes((endEpochTime))));
+
+		System.out.println(startRange.toString() + " " + endRange.toString());
+		filterList.addFilter(startRange);
+		filterList.addFilter(endRange);
+		filterList.addFilter(startRow);
+
+		/*
+		 * Get get = new Get(Bytes.toBytes("1")); get.setFilter(filterList);
+		 */
+
+		Configuration conf = HBaseConfiguration.create();
+		conf.set("hbase.zookeeper.quorum", hbaseIP);
+		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
+		Connection connection = ConnectionFactory.createConnection(conf);
+		TableName tableName = TableName.valueOf(tableNameString);
+		Table table = connection.getTable(tableName);
+
+		Scan scan = new Scan();
+		scan.addFamily(Bytes.toBytes(columnFamilyNameString));
+		scan.setFilter(filterList);
+		scan.setCaching(50); // Set the pagination limit
+		scan.setMaxResultsPerColumnFamily(100); // limit
+		// scan.setTimeRange(1495004244903L, 1495204244903L); //for auto-generated timestamp
+
+		ResultScanner scanner = table.getScanner(scan);
+		NavigableMap<Object, Object> colList = new TreeMap<Object, Object>();
+		NavigableMap<byte[], byte[]> colValues = null;
+		for (Result result : scanner) {
+			colValues = result.getFamilyMap(Bytes.toBytes(columnFamilyNameString));
+			if (!colValues.isEmpty()) {
+				for (Map.Entry<byte[], byte[]> entry : colValues.entrySet()) {
+					ByteArrayInputStream baos=new ByteArrayInputStream(entry.getKey());
+			        DataInputStream dos=new DataInputStream(baos);
+			        long colName=dos.readLong();
+			        dos.close();
+
+					colList.put(new Date(colName),
+							Bytes.toString(entry.getValue()));
+				}
+			}
+		}
+		System.out.println(colList.keySet());
+		System.out.println(colList.values());
 	}
 
 	private static void totalEntriesCounter() throws IOException {
@@ -128,9 +200,10 @@ public class HBase {
 	private static void insertRecords() throws IOException {
 		Configuration conf = HBaseConfiguration.create();
 		conf.set("hbase.zookeeper.quorum", hbaseIP);
+		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
 		
 		Connection connection = ConnectionFactory.createConnection(conf);
-		TableName tableName = TableName.valueOf("TLG_Wide12");
+		TableName tableName = TableName.valueOf(tableNameString);
 		Table table = connection.getTable(tableName);
 		//this.durability = Durability.valueOf(HBaseConnection11.getHbaseProperties().getHBaseDurability().toUpperCase());
 		
@@ -172,3 +245,4 @@ public class HBase {
 	}
 }
 //Ignore exception- Could not locate executable null\bin\winutils.exe
+//Code doesn't work here but outside cuz of incompatibility with hadoop versions- not the case with no specification

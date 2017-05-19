@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<property>
 		<name>hbase.rootdir</name>
@@ -5,7 +6,7 @@
 	</property>
 	<property>
 		<name>hbase.hbase.zookeeper.quorum</name>
-		<value>192.168.237.140</value>
+		<value>192.168.50.143</value>
 	</property>
 	<property>
 		<name>hbase.zookeeper.property.clientPort</name>
