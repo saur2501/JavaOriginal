@@ -1,16 +1,16 @@
-package system.os;
+package system.os.mgmt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-class Node{
+class CacheNode{
     int key;
     int value;
-    Node pre;
-    Node next;
+    CacheNode pre;
+    CacheNode next;
  
-    public Node(int key, int value){
+    public CacheNode(int key, int value){
         this.key = key;
         this.value = value;
     }
@@ -21,9 +21,9 @@ class Node{
 
 class LRUCache {
     int capacity;
-    HashMap<Integer, Node> map = new HashMap<Integer, Node>();
-    Node head=null;
-    Node end=null;
+    HashMap<Integer, CacheNode> map = new HashMap<Integer, CacheNode>();
+    CacheNode head=null;
+    CacheNode end=null;
  
     public LRUCache(int capacity) {
         this.capacity = capacity;
@@ -31,7 +31,7 @@ class LRUCache {
  
     public int get(int key) {
         if(map.containsKey(key)){
-            Node n = map.get(key);
+            CacheNode n = map.get(key);
             remove(n);
             setHead(n);
             return n.value;
@@ -41,7 +41,7 @@ class LRUCache {
         return -1;
     }
  
-    public void remove(Node n){
+    public void remove(CacheNode n){
         if(n.pre!=null){
             n.pre.next = n.next;
         }else{
@@ -56,7 +56,7 @@ class LRUCache {
  
     }
  
-    public void setHead(Node n){
+    public void setHead(CacheNode n){
         n.next = head;
         n.pre = null;
  
@@ -71,12 +71,12 @@ class LRUCache {
  
     public void set(int key, int value) {
         if(map.containsKey(key)){
-            Node old = map.get(key);
+            CacheNode old = map.get(key);
             old.value = value;
             remove(old);
             setHead(old);
         }else{
-            Node created = new Node(key, value);
+            CacheNode created = new CacheNode(key, value);
             if(map.size()>=capacity){
                 map.remove(end.key);
                 remove(end);
