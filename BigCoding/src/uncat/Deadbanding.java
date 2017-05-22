@@ -16,7 +16,7 @@ public class Deadbanding {
 		int[] inputArray = new int[10000];
 		int[] outputArray = new int[10000];
 		Random random = new Random();
-		inputArray[0] = random.nextInt(1000);
+		inputArray[0] = 5000 + random.nextInt(1000);
 		outputArray[k++] = inputArray[0];
 		stats.addValue(inputArray[0]);
 		for(int i = 1; i < 10000; i++) {
@@ -25,11 +25,12 @@ public class Deadbanding {
 	        mean = stats.getMean();
 			std = stats.getStandardDeviation();
 			grainsOfInterest = 3 * std / granularity;
-			if(inputArray[i] - inputArray[i-1] >= grainsOfInterest) {
+			System.out.print("\t" + mean + "\t" + std + "\t" + grainsOfInterest + "\t" + inputArray[i] + "\t" + outputArray[k-1]);				//to ensure window- use .getSum() and .getPercentile for median
+			if(Math.abs(inputArray[i] - outputArray[k-1]) >= grainsOfInterest) {		//outputArray[k] preferred over inputArray[i-1]
 				outputArray[k++] = inputArray[i];
-			}
+				System.out.println("\ttrue");
+			} else System.out.println("\tfalse");
 			//median = stats.getPercentile(50);
-			System.out.println("\t" + mean + "\t" + std + "\t" + grainsOfInterest + "\t" + inputArray[i] + "\t" + outputArray[k-1]);				//to ensure window- use .getSum() and .getPercentile for median
 		}
 		System.out.println(k);
 	}
