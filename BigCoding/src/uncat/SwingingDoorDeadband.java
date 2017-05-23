@@ -1,4 +1,5 @@
 package uncat;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -10,11 +11,11 @@ public class SwingingDoorDeadband {
 		Map<Integer, Integer> outputMap = new HashMap<>();
 		Random random = new Random();
 		int percentagePrecision = 5;
-		int deviationPermitted = (1000-0)/percentagePrecision;
+		int deviationPermitted = (1000-0)*percentagePrecision/100;
 		int tMin = 3;
 		int tMax = 5;
 		double permittedSlopeTop = Double.MAX_VALUE;
-		double permittedSlopeBottom = -Double.MAX_VALUE;
+		double permittedSlopeBottom = -999999;
 		
 		inputMap.put(0, random.nextInt(1000));
 		outputMap.put(0, inputMap.get(0));
@@ -22,7 +23,7 @@ public class SwingingDoorDeadband {
 		long iterationsFromLastWrite = 0;
 		System.out.println("currentReadValue\tlastWrittenValue\tslope\tpermittedSlopeTop\tpermittedSlopeBottom\tisPointWritable\tisPointWritten");
 		for(int i=1;i<10000;i++) {
-			inputMap.put(i, random.nextInt(1000));
+			inputMap.put(i, inputMap.get(i-1) + 25 - random.nextInt(50));
 			iterationsFromLastWrite++;
 			
 			int lastWrittenValue = outputMap.get(k-1);
@@ -48,7 +49,7 @@ public class SwingingDoorDeadband {
 				double slopeBottom = (double) (valueChange - deviationPermitted) / iterationsFromLastWrite;
 				permittedSlopeTop = minAbsolute(slopeTop, permittedSlopeTop);
 				permittedSlopeBottom = minAbsolute(slopeBottom, permittedSlopeBottom);
-				System.out.println("false");	//previous value is not written
+				System.out.println("false");
 			}
 		}
 		System.out.println(k);
