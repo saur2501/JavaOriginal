@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="test" default="run">
+	<property name="directory" value="C:\Users\Saurabh\Desktop\kris"/>
+	<target name="clean">
+		<mkdir dir="${directory}" />
+		<delete dir="${directory}\antmade" />
+	</target>
+	<target name="compile" depends="clean">
+		<mkdir dir="${directory}\antmade" />
+		<javac srcdir="C:\Users\Saurabh\git\JavaSample\BigCoding\src\uncat\ant" destdir="${directory}\antmade" />
+	</target>
+	<target name="jar" depends="clean, compile">
+		<jar destfile="${directory}\app.jar" basedir="${directory}\antmade">
+			<manifest>
+				<attribute name="Main-Class" value="uncat.ant.Test" />
+			</manifest>
+		</jar>
+	</target>
+	<target name="run" depends="jar">
+		<java jar="${directory}\app.jar" fork="true" failonerror="true"
+			maxmemory="128m">
+			<arg value="-h" />
+			<classpath>
+				<pathelement location="${directory}\app.jar" />
+			</classpath>
+		</java>
+	</target>
+</project>
