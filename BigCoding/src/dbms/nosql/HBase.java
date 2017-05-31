@@ -1,5 +1,6 @@
 package dbms.nosql;
 
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
@@ -108,10 +109,9 @@ public class HBase {
 	    System.out.println(resultMap.keySet() + "= Keys\nValues = " + resultMap.values().size());
 	}
 
-	@SuppressWarnings("unused")
 	private static void insertRecords() throws IOException {
 		Put put = new Put(Bytes.toBytes(rowkey));
-		
+		System.out.println("Stage1!");
 		HashMap<String, byte[]> values = new HashMap<> ();
 		String string= "Greet Greatness Again!!";
 		byte[] bytes = string.getBytes(Charset.forName("UTF-8"));
@@ -120,13 +120,15 @@ public class HBase {
 	      byte[] value = entry.getValue();
 	      put.addColumn(columnFamilyBytes, Bytes.toBytes(entry.getKey()), value);
 	    }
+		System.out.println("Stage2!");
 		table.put(put);
 		System.out.println("Point p is added to TLG_Wide's TagsWide");
 	}
 
+	@SuppressWarnings("unused")
 	private static void createTable() throws IOException {
 		Admin admin = connection.getAdmin();
-		HTableDescriptor table = new HTableDescriptor(TableName.valueOf("TLG_Wide16"));
+		HTableDescriptor table = new HTableDescriptor(TableName.valueOf("TLG_Wide15"));
 		table.addFamily(new HColumnDescriptor("TagsWide"));
 
 		if (!admin.tableExists(table.getTableName())) {
@@ -144,8 +146,8 @@ public class HBase {
 
 	private static Connection getConnection() throws IOException {
 		Configuration conf = HBaseConfiguration.create();
-		conf.set("hbase.zookeeper.quorum", "192.168.50.147");
-		conf.set("hbase.rootdir", "hdfs://192.168.50.147:8020/apps/hbase/data");
+		conf.set("hbase.zookeeper.quorum", "sandbox.hortonworks.com");
+		conf.set("hbase.rootdir", "hdfs://sandbox.hortonworks.com:8020/apps/hbase/data");
 		conf.set("hbase.zookeeper.property.clientPort", "2181");
 		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
 		Connection connection = ConnectionFactory.createConnection(conf);
@@ -153,4 +155,4 @@ public class HBase {
 	}
 }
 //Ignore exception- Could not locate executable null\bin\winutils.exe
-//Code doesn't work here but outside cuz of incompatibility with hadoop versions- not the case with no specification
+//Code works with 2.4- but not with 2.5- probably due to docker-ized. Also, ensure configuration copied from ambari.
