@@ -57,7 +57,7 @@ public class HBase {
 			String rowkey = Bytes.toString(result.getRow());
 			
 			Get g = new Get(Bytes.toBytes(rowkey));
-	        g.addFamily(Bytes.toBytes("TagsWide"));
+	        g.addFamily(columnFamilyBytes);
 	        Result result2 = table.get(g);
 	        count += result2.size();
 		}
