@@ -10,14 +10,15 @@ public class Presto {
 	private static Statement stmt;
 	public static void main(String[] args) throws Exception {
 		Class.forName("com.facebook.presto.jdbc.PrestoDriver");
-		con = DriverManager.getConnection("jdbc:presto://192.168.237.137:8081/hive/default","root","");
+		con = DriverManager.getConnection("jdbc:presto://192.168.50.134:8081/hive","root","");
 		stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT orderkey FROM orders1 LIMIT 10");
+		ResultSet rs = stmt.executeQuery("SELECT * FROM sample_07 LIMIT 3");
 		System.out.println(rs.toString());
 		while(rs.next()) {
-			System.out.println(rs.getInt("orderkey"));
+			System.out.println(rs.getString("description"));
 		}
 		con.close();
 		System.exit(0);
 	}
 }
+//Ref- Presto.io documentation
