@@ -5,7 +5,7 @@ import java.util.*;
 public class ClosestPair {
  
     /**
-     * Find min distance for neightbors in sorted by x-coord point list
+     * Find min distance for neighbors in sorted by x-coord point list
      * Fix divide problem where information is lost in algorithm
      * @param ps
      * @return

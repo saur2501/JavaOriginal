@@ -158,29 +158,31 @@ public class SortingRoutines{
 				  System.out.println();
 				  switch(code3){
 				  case 1:
-					  insertionSort(array.length);
+					  insertionSort(array.length);          //induction
 					  System.out.println("After Insertion Sort :");
 					  break;
 				  case 2:
-					  mergeSort(0, array.length - 1);
+					  mergeSort(0, array.length - 1);       //DnC
 					  System.out.println("After Merge Sort : ");  
 					  break;
 				  case 3:
-					  quickSort(0,array.length - 1);
+					  quickSort(0,array.length - 1);        //DnC over smart backtracking for first selected element
 					  System.out.println("After Quick Sort : ");
 					  break;
 				  case 4:
 					  List<Integer> list = new ArrayList<Integer>();
 					  for(i=0;i<array.length;i++)
 					  	list.add(array[i]);
-					  bucketSort(list, countDigits(array[getMaxIndex()]));
+					  bucketSort(list, countDigits(array[getMaxIndex()]));      //DnC over digits
 					  break;
 				  case 5:
-					  hashingSort();
+					  hashingSort();                                            //?
 					  System.out.println("After Hashing : ");
 					  break;
 				  default:
 					  break;
+					  //selection sort - backtracking for index sequence.
+                      //bubble sort - backtracking for reverse index sequence.
 			  }
 				  for(i = 0; i <array.length; i++)
 					  System.out.print(array[i]+"  ");

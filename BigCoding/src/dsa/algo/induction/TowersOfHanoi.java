@@ -1,4 +1,4 @@
-package dsa.algo.dac;
+package dsa.algo.induction;
 
 import java.util.Scanner;
 

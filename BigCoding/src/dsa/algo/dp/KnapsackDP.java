@@ -1,7 +1,7 @@
 package dsa.algo.dp;
 
 import java.util.*;
-
+//DP and greedy
 public class KnapsackDP 
 {
 	Scanner sc = new Scanner(System.in);
